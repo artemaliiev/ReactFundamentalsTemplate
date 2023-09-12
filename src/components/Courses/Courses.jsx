@@ -30,7 +30,7 @@ export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
 
 		content = coursesList.map(course => (
 			<CourseCard
-				key={course.id.toString()}
+				key={course.id}
 				course={course}
 				authorsList={getCourseAuthorsList(course)}
 			/>
