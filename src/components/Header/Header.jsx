@@ -1,21 +1,20 @@
 import React from 'react';
 
+import { Logo } from './components/Logo/Logo'
+import { Button } from '../../common/Button/Button'
+
 import styles from './styles.module.css';
 
-export const Header = () => {
-	
-	// write your cose here
+export const Header = ({isLoggedIn, isLoginOrRegistrationPage}) => {
+	const BUTTON_TEXT = isLoggedIn ? 'LOGOUT' : 'LOGIN';
 
 	return (
 		<div className={styles.headerContainer}>
-
-			// use Logo component
+			<Logo />
 
 			<div className={styles.userContainer}>
-				<p className={styles.userName}>Boris</p>
-				
-				// reuse Button component for 'Login / Logout' button
-
+				{isLoggedIn && <p className={styles.userName}>Boris</p>}
+				{!isLoginOrRegistrationPage && <Button buttonText={BUTTON_TEXT} />}
 			</div>
 		</div>
 	);

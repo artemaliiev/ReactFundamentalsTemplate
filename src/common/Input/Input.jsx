@@ -8,7 +8,7 @@ export const Input = ({
   onChange,
   'data-testid': dataTestId
 }) => (
-<label>
+<label className={styles.label}>
 	{labelText}
 	<input onChange={onChange} placeholder={placeholderText} data-testid={dataTestId} />
 </label>

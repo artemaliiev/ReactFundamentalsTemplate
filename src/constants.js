@@ -41,3 +41,5 @@ export const mockedAuthorsList = [
     name: 'Valentina Larina'
   },
 ]
+
+export const BUTTON_SHOW_COURSE_TEXT = 'Show course';

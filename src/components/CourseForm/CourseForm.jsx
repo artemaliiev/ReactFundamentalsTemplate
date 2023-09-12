@@ -1,46 +1,79 @@
 // import React from 'react';
 
+// import { Input } from '../../common/Input/Input';
+
 // import styles from './styles.module.css';
 
 // export const CourseForm = ({authorsList, createCourse, createAuthor}) => {
+//     const TITLE_LABEL = 'Title';
+//     const DURATION_LABEL = 'Duration';
+//     const INPUT_PLACEHOLDER = 'Input text';
 
 // 	//write your code here
+//     const handleSubmit = () => {
+//         console.log(1);
+//     };
+
+//     const renderDuration = timeValue => {
+//         if (timeValue) {
+
+//         }
+
+//         return `<b>00:00</b> hours`;
+//     }
 
 // 	return (
-// 		<form onSubmit={handleSubmit}>
-// 			<div>
-// 				// reuse Input component for title field with data-testid="titleInput"
+//         <>
+//             <h1>Course edit/create page</h1>
+//             <h3>Main Info</h3>
+//             <form onSubmit={handleSubmit}>
+//                 <div>
+//                     {/*// reuse Input component for title field with data-testid="titleInput"*/}
 
-// 				// reuse Button component for 'Save course' button with data-testid="createCourseButton"
-// 			</div>
+//                     {/*// reuse Button component for 'Save course' button with data-testid="createCourseButton"*/}
+//                     <Input labelText={TITLE_LABEL} placeholderText={INPUT_PLACEHOLDER} data-testid="titleInput" />
+//                 </div>
 
-// 			<label>
-// 				Description
-// 				<textarea data-testid="descriptionTextArea" />
-// 			</label>
+//                 <label>
+//                     Description
+//                     <textarea data-testid="descriptionTextArea" />
+//                 </label>
 
-// 			<div className={styles.infoWrapper}>
-// 				<div>
-// 					// use CreateAuthor component
+//                 <h3>Duration</h3>
 
-// 					// reuse Input component with data-testid='durationInput' for duration field
+//                 <div>
+//                     <Input
+//                         labelText={DURATION_LABEL}
+//                         placeholderText={INPUT_PLACEHOLDER}
+//                         onChange={renderDuration}
+//                         data-testid="titleInput"
+//                     />
+//                     {renderDuration(timeValue)}
+//                 </div>
 
-// 					<p>Duration: </p>
-// 				</div>
+//                 <div className={styles.infoWrapper}>
+//                     <div>
+//                         {/*// use CreateAuthor component*/}
 
-// 				<div className={styles.authorsContainer}>
-// 					<strong>Authors</strong>
+//                         {/*// reuse Input component with data-testid='durationInput' for duration field*/}
 
-// 					// use 'map' to display all available autors. Reuse 'AuthorItem' component for each author
+//                         <p>Duration: </p>
+//                     </div>
 
-// 					<strong>Course authors</strong>
+//                     <div className={styles.authorsContainer}>
+//                         <strong>Authors</strong>
 
-// 					// use 'map' to display course's autors
-// 					{/* <p data-testid="selectedAuthor"}>{author.name}</p> */}
+//                         {/* use 'map' to display all available autors. Reuse 'AuthorItem' component for each author */}
 
-// 					<p className={styles.notification}>List is empty</p> // display this paragraph if there are no authors in the course
-// 				</div>
-// 			</div>
-// 		</form>
+//                         <strong>Course authors</strong>
+
+//                         {/* use 'map' to display course's autors */}
+//                         {/* <p data-testid="selectedAuthor"}>{author.name}</p> */}
+
+//                         <p className={styles.notification}>List is empty</p> {/* display this paragraph if there are no authors in the course */}
+//                     </div>
+//                 </div>
+//             </form>
+//         </>
 // 	);
 // };

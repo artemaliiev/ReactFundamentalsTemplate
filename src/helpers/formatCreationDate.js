@@ -1,6 +1,5 @@
 export const formatCreationDate = (date) => {
-  
-  	// write your solution here
+  const rawDate = new Date(date).toJSON().slice(0, 10);
 
-  return date;
+  return `${rawDate.slice(8, 10)}.${rawDate.slice(5, 7)}.${rawDate.slice(0, 4)}`;
 }
