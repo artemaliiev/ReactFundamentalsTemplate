@@ -5,7 +5,7 @@ import { getCourseDuration, formatCreationDate } from '../../../../helpers';
 // import { CourseInfo } from '../../../CourseInfo';
 import { Button } from './../../../../common/Button/Button'
 
-// import { BUTTON_SHOW_COURSE_TEXT } from '../../../../constants'
+import { BUTTON_SHOW_COURSE_TEXT } from '../../../../constants'
 
 import styles from './styles.module.css';
 
@@ -14,13 +14,8 @@ export const CourseCard = ({course, handleShowCourse, authorsList}) => {
 	// const [courseId, setCourseId] = useState(null);
 	// const BUTTON_DELETE_COURSE_TEXT = 'Delete';
 	// const BUTTON_UPDATE_COURSE_TEXT = 'Update';
-	
 
-	const showCourse = courseId => {
 
-	};
-
-	
 	// <CourseInfo
 	// 	coursesList={mockedCoursesList}
 	// 	authorsList={mockedAuthorsList}
@@ -47,7 +42,7 @@ export const CourseCard = ({course, handleShowCourse, authorsList}) => {
 					<span>{formatCreationDate(course.creationDate)}</span>
 				</p>
 				<div>
-					<Button onClick={showCourse(course.id)} buttonText={'Show course'} />
+					<Button onClick={handleShowCourse(course.id)} buttonText={BUTTON_SHOW_COURSE_TEXT} />
 				</div>
 			</div>
 		</div>

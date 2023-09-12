@@ -43,5 +43,5 @@ export const mockedAuthorsList = [
 ]
 
 export const BUTTON_SHOW_COURSE_TEXT = 'Show course';
-
 export const BUTTON_ADD_COURSE_TEXT = 'Add new course';
+export const BUTTON_BACK_TEXT = 'Back';
