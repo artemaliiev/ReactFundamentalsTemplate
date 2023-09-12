@@ -4,6 +4,9 @@ import styles from './styles.module.css';
 
 import { CourseCard } from './components/CourseCard/CourseCard';
 import { EmptyCourseListComponent } from './components/EmptyCourseListComponent/EmptyCourseListComponent';
+import { Button } from '../../common';
+
+import { BUTTON_ADD_COURSE_TEXT } from '../../constants'
 
 export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
 	const isCoursesListNotEmpty = coursesList.length > 0;
@@ -38,6 +41,7 @@ export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
 
 	return (
 		<>
+			<Button buttonText={BUTTON_ADD_COURSE_TEXT} />
 			<div className={styles.panel}>
 				{content}
 			</div>

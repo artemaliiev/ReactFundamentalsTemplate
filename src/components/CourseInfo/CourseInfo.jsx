@@ -5,8 +5,9 @@ import { formatCreationDate, getCourseDuration } from '../../helpers';
 import styles from './styles.module.css';
 
 export const CourseInfo = ({coursesList, authorsList, onBack, showCourseId}) => {
-
-	// write your code here
+	const showCourse = coursesList.find(course => course.id === showCourseId);
+	const duration = getCourseDuration(showCourse.duration);
+	const showedAuthorsList = authorsList.filter(author => showCourse.authors.includes(author.id));
 
 	return (
 		<div data-testid='courseInfo'>
@@ -15,24 +16,26 @@ export const CourseInfo = ({coursesList, authorsList, onBack, showCourseId}) => 
 
 			<h1>Course title</h1>
 			<div className={styles.courseInfo}>
-				<p className={styles.description}>description</p>
+				<p className={styles.description}>{showCourse.description}</p>
 				<div>
 					<p>
 						<b>ID: </b>
-						id
+						{showCourseId}
 					</p>
 					<p>
 						<b>Duration: </b>
-						duration
+						{duration}
 					</p>
 					<p>
 						<b>Created: </b>
-						creation date
+						{formatCreationDate(showCourse.creationDate)}
 					</p>
 					<div>
 						<b>Authors</b>
 						<ul className={styles.authorsList}>
-						{ /*//use '.map' to render authors list with 'li' tag*/ }
+							{ showedAuthorsList.map(author=>(
+								<li key={author.id}>{author.name}</li>
+							)) }
 						</ul>
 					</div>
 				</div>

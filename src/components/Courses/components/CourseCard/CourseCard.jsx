@@ -47,7 +47,7 @@ export const CourseCard = ({course, handleShowCourse, authorsList}) => {
 					<span>{formatCreationDate(course.creationDate)}</span>
 				</p>
 				<div>
-					<Button onClick={showCourse(course.id)} buttonText={BUTTON_SHOW_COURSE_TEXT} />
+					<Button onClick={showCourse(course.id)} buttonText={'Show course'} />
 				</div>
 			</div>
 		</div>
