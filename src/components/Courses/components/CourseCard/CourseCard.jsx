@@ -35,14 +35,14 @@ export const CourseCard = ({course, handleShowCourse, authorsList}) => {
 				</p>
 				<p>
 					<b>Duration: </b>
-					<span>{getCourseDuration(course.duration)}</span>
+					{getCourseDuration(course.duration)}
 				</p>
 				<p>
 					<b>Created: </b>
-					<span>{formatCreationDate(course.creationDate)}</span>
+					{formatCreationDate(course.creationDate)}
 				</p>
 				<div>
-					<Button onClick={handleShowCourse(course.id)} buttonText={BUTTON_SHOW_COURSE_TEXT} />
+					<Button onClick={handleShowCourse} buttonText={BUTTON_SHOW_COURSE_TEXT} />
 				</div>
 			</div>
 		</div>
