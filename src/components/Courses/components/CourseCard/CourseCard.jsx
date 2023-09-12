@@ -5,7 +5,7 @@ import { getCourseDuration, formatCreationDate } from '../../../../helpers';
 // import { CourseInfo } from '../../../CourseInfo';
 import { Button } from './../../../../common/Button/Button'
 
-import { BUTTON_SHOW_COURSE_TEXT } from '../../../../constants'
+// import { BUTTON_SHOW_COURSE_TEXT } from '../../../../constants'
 
 import styles from './styles.module.css';
 
