@@ -21,11 +21,12 @@ export const CourseCard = ({course, handleShowCourse, authorsList}) => {
 	// 	authorsList={mockedAuthorsList}
 	// 	showCourseId={courseId}
 	// />
+	const title = course.title;
 
 	return (
 		<div className={styles.cardContainer} data-testid='courseCard'>
 			<div className={styles.cardText}>
-				<h2>{course.title}</h2>
+				<h2>{title}</h2>
 				<p>{course.description}</p>
 			</div>
 			<div className={styles.cardDetails}>

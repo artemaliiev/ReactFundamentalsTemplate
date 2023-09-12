@@ -45,7 +45,7 @@ export const CourseInfo = ({coursesList, authorsList, onBack, showCourseId}) => 
 					</div>
 				</div>
 			</div>
-			<Button onClick={onBack()} buttonText={BUTTON_BACK_TEXT} />
+			<Button onClick={onBack} buttonText={BUTTON_BACK_TEXT} />
 		</>
 	);
 };
