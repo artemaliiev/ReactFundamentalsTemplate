@@ -45,3 +45,7 @@ export const mockedAuthorsList = [
 export const BUTTON_SHOW_COURSE_TEXT = 'Show course';
 export const BUTTON_ADD_COURSE_TEXT = 'Add new course';
 export const BUTTON_BACK_TEXT = 'Back';
+export const BUTTON_DELETE_COURSE_TEXT = 'Delete';
+export const BUTTON_UPDATE_COURSE_TEXT = 'Update';
+export const BUTTON_SEARCH_COURSE_TEXT = 'Search';
+export const DEFAULT_PLACEHOLDER_TEXT = 'Input text';

@@ -1,26 +1,14 @@
 import React from 'react';
 
+import styles from './styles.module.css';
+
 import { getCourseDuration, formatCreationDate } from '../../../../helpers';
 
-// import { CourseInfo } from '../../../CourseInfo';
 import { Button } from './../../../../common/Button/Button'
 
 import { BUTTON_SHOW_COURSE_TEXT } from '../../../../constants'
 
-import styles from './styles.module.css';
-
 export const CourseCard = ({course, handleShowCourse, authorsList}) => {
-
-	// const [courseId, setCourseId] = useState(null);
-	// const BUTTON_DELETE_COURSE_TEXT = 'Delete';
-	// const BUTTON_UPDATE_COURSE_TEXT = 'Update';
-
-
-	// <CourseInfo
-	// 	coursesList={mockedCoursesList}
-	// 	authorsList={mockedAuthorsList}
-	// 	showCourseId={courseId}
-	// />
 	const title = course.title;
 
 	return (
@@ -43,7 +31,7 @@ export const CourseCard = ({course, handleShowCourse, authorsList}) => {
 					{formatCreationDate(course.creationDate)}
 				</p>
 				<div>
-					<Button onClick={handleShowCourse} buttonText={BUTTON_SHOW_COURSE_TEXT} />
+					<Button handleClick={()=>handleShowCourse(course.id)} buttonText={BUTTON_SHOW_COURSE_TEXT} />
 				</div>
 			</div>
 		</div>

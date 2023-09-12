@@ -1,11 +1,11 @@
 import React from 'react';
 
+import styles from './styles.module.css';
+
 import { formatCreationDate, getCourseDuration } from '../../helpers';
 import { Button } from '../../common/Button/Button';
 
 import { BUTTON_BACK_TEXT } from '../../constants';
-
-import styles from './styles.module.css';
 
 export const CourseInfo = ({coursesList, authorsList, onBack, showCourseId}) => {
 	const showCourse = coursesList.find(course => course.id === showCourseId);
@@ -14,7 +14,7 @@ export const CourseInfo = ({coursesList, authorsList, onBack, showCourseId}) => 
 
 	return (
 		<>
-			<div data-testid='courseInfo'>
+			<div className={styles.courseContainer} data-testid='courseInfo'>
 				{ /*// Module 1: reuse Button component for 'onBack' functionality */ }
 				{ /*// Module 2: use 'react-router-dom' 'Link' component for button 'Back'*/ }
 
@@ -44,8 +44,8 @@ export const CourseInfo = ({coursesList, authorsList, onBack, showCourseId}) => 
 						</div>
 					</div>
 				</div>
+				<Button handleClick={()=>onBack()} buttonText={BUTTON_BACK_TEXT} />
 			</div>
-			<Button onClick={onBack} buttonText={BUTTON_BACK_TEXT} />
 		</>
 	);
 };

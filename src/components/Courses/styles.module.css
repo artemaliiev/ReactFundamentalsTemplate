@@ -1,3 +1,15 @@
+.addNewCourseWrapper {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.addNewCourseBtnContainer {
+  align-self: flex-end;
+}
+
 .panel {
   display: flex;
   justify-content: space-between;

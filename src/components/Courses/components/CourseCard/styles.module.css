@@ -1,11 +1,14 @@
 .cardContainer {
   display: flex;
-  padding: 8px 16px;
-  border: 1px solid black;
+  padding: 8px 16px 24px;
+  border: 1px solid #ccc;
+  border-left: 5px solid #333E48;
   justify-content: space-between;
   gap: 16px;
   max-width: 1000px;
   margin: 0 auto;
+  border-radius: 4px;
+  background-color: #fff;
 }
 
 .cardText {

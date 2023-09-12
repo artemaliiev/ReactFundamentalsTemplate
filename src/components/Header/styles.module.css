@@ -1,8 +1,14 @@
+.headerWrapper {
+  background-color: #fff;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, .15);
+}
+
 .headerContainer {
   display: flex;
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 15px 0;
 }
 
 .userContainer {

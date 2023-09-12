@@ -1,6 +1,16 @@
+.courseContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 .courseInfo {
   display: flex;
-  gap: 50px;
+  gap: 40px;
+  padding: 20px;
+  background-color: #fff;
+  margin-bottom: 40px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .authorsList {
