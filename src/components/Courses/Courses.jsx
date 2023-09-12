@@ -28,11 +28,11 @@ export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
 			}, '');
 		};
 
-		content = coursesList.map(course => (
+		content = coursesList.map(courseItem => (
 			<CourseCard
-				key={course.id}
-				course={course}
-				authorsList={getCourseAuthorsList(course)}
+				key={courseItem.id}
+				course={courseItem}
+				authorsList={getCourseAuthorsList(courseItem)}
 			/>
 		));
 	} else {

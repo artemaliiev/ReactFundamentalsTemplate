@@ -22,7 +22,6 @@ export const CourseCard = ({course, handleShowCourse, authorsList}) => {
 	// 	showCourseId={courseId}
 	// />
 	const title = course.title;
-	console.log(course);
 
 	return (
 		<div className={styles.cardContainer} data-testid='courseCard'>
