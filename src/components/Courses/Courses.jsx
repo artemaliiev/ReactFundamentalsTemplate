@@ -17,20 +17,6 @@ export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
 	const isCoursesListNotEmpty = finalCoursesList.length > 0;
 
 	if (isCoursesListNotEmpty) {
-		const authorIdValueList = [];
-
-		const createAuthorIdValueList = () => {
-			authorsList.forEach(author => authorIdValueList[author.id] = author.name);
-		};
-
-		createAuthorIdValueList();
-
-		const getCourseAuthorsList = (course) => {
-			return course.authors.reduce((acc, author) => {
-				return acc ? acc += `, ${authorIdValueList[author]}` : authorIdValueList[author];
-			}, '');
-		};
-
 		return (
 			<>
 				<div className={styles.addNewCourseWrapper}>
@@ -44,7 +30,7 @@ export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
 						<CourseCard
 							key={courseItem.id}
 							course={courseItem}
-							authorsList={getCourseAuthorsList(courseItem)}
+							authorsList={authorsList}
 							handleShowCourse={handleShowCourse}
 						/>
 					))}

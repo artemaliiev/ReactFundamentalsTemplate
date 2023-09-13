@@ -9,18 +9,30 @@ import { Button } from './../../../../common/Button/Button'
 import { BUTTON_SHOW_COURSE_TEXT } from '../../../../constants'
 
 export const CourseCard = ({course, handleShowCourse, authorsList}) => {
-	const title = course.title;
+	const authorIdValueList = [];
+
+	const createAuthorIdValueList = () => {
+		authorsList.forEach(author => authorIdValueList[author.id] = author.name);
+	};
+
+	createAuthorIdValueList();
+
+	const getCourseAuthorsList = () => {
+		return course.authors.reduce((acc, author) => {
+			return acc ? acc += `, ${authorIdValueList[author]}` : authorIdValueList[author];
+		}, '');
+	};
 
 	return (
 		<div className={styles.cardContainer} data-testid='courseCard'>
 			<div className={styles.cardText}>
-				<h2>{title}</h2>
+				<h2>{course.title}</h2>
 				<p>{course.description}</p>
 			</div>
 			<div className={styles.cardDetails}>
 				<p>
 					<b>Authors: </b>
-					{authorsList}
+					{getCourseAuthorsList()}
 				</p>
 				<p>
 					<b>Duration: </b>

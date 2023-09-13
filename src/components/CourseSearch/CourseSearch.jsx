@@ -13,7 +13,7 @@ export const CourseSearch = ({coursesList, handleSearchResult}) => {
         e.preventDefault();
 
         let searchResult = coursesList;
-        const searchWord = ref.current.value;
+        const searchWord = ref.current.value.toLowerCase();
 
         ref.current.value = '';
 
