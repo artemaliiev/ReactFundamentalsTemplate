@@ -48,4 +48,10 @@ export const BUTTON_BACK_TEXT = 'Back';
 export const BUTTON_DELETE_COURSE_TEXT = 'Delete';
 export const BUTTON_UPDATE_COURSE_TEXT = 'Update';
 export const BUTTON_SEARCH_COURSE_TEXT = 'Search';
+export const BUTTON_LOGIN_TEXT = 'LOGIN';
+
 export const DEFAULT_PLACEHOLDER_TEXT = 'Input text';
+
+export const EMAIL_LABEL = 'Email';
+export const PASSWORD_LABEL = 'Password';
+export const NAME_LABEL = 'Name';

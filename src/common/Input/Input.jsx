@@ -7,7 +7,8 @@ export const Input = ({
   labelText,
   onChange,
   reference,
-  inputName,
+  value,
+  name,
   'data-testid': dataTestId
 }) => (
 <label className={styles.label}>
@@ -17,7 +18,8 @@ export const Input = ({
     onChange={onChange}
     placeholder={placeholderText}
     ref={reference}
-    name={inputName}
+    value={value}
+    name={name}
     data-testid={dataTestId}
   />
 </label>

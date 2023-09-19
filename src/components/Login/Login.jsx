@@ -1,27 +1,33 @@
-// import React from 'react';
+import React from 'react';
+import { Link } from "react-router-dom";
 
-// import styles from './styles.module.css';
+import { Input } from '../../common/Input/Input';
+import { Button } from '../../common/Button/Button';
 
-// export const Login = () => {
-	
-// 	// write your code here
+import { EMAIL_LABEL, PASSWORD_LABEL, DEFAULT_PLACEHOLDER_TEXT, BUTTON_LOGIN_TEXT } from '../../constants'
 
-// 	return (
-// 		<div className={styles.container}>
-// 			<form onSubmit={handleSubmit}>
-// 				<h1>Login</h1>
+import styles from './styles.module.css';
 
-// 				// reurse Input component for email field
+export const Login = () => {
+	const handleSubmit = () => {
 
-// 				// reurse Input component for password field
+    }
 
-// 				// reurse Button component for 'Login' button
+	return (
+		<div className={styles.container}>
+			<form onSubmit={handleSubmit}>
+				<h1>Login</h1>
 
-// 			</form>
-// 			<p>
-// 				If you don't have an account you can&nbsp;
-// 				<a>register</a>
-// 			</p>
-// 		</div>
-// 	);
-// };
+				<Input  labelText={EMAIL_LABEL} placeholderText={DEFAULT_PLACEHOLDER_TEXT} data-testid="emailInput" />
+
+                <Input  labelText={PASSWORD_LABEL} placeholderText={DEFAULT_PLACEHOLDER_TEXT} data-testid="passwordInput" />
+
+				<Button buttonText={BUTTON_LOGIN_TEXT} />
+			</form>
+			<p>
+                If you don't have an account you may&nbsp;
+				<b><Link to="/registration">register</Link></b>
+			</p>
+		</div>
+	);
+};
