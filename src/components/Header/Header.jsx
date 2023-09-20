@@ -1,21 +1,38 @@
 import React from 'react';
+import { Link, useLocation } from "react-router-dom";
 
 import { Logo } from './components/Logo/Logo'
 import { Button } from '../../common/Button/Button'
 
 import styles from './styles.module.css';
 
-export const Header = ({isLoggedIn, isLoginOrRegistrationPage}) => {
-	const BUTTON_TEXT = isLoggedIn ? 'Logout' : 'Login';
+export const Header = ({isLoggedIn, userName, setLoginToken, setUserName}) => {
+	const { pathname } = useLocation();
+	const isLoginOrRegistrationPage = pathname === '/login' || pathname === '/registration';
+
+	let showName = !isLoginOrRegistrationPage && userName;
+
+	const handleLogOut = () => {
+		setLoginToken(null);
+		setUserName(null);
+	};
+
+	const HeaderButton = () => {
+		if (!isLoginOrRegistrationPage) {
+			return isLoggedIn ? <Button handleClick={handleLogOut} buttonText="Logout" /> : <Button buttonText="Login" />;
+		}
+	};
 
 	return (
 		<div className={styles.headerWrapper}>
 			<div className={styles.headerContainer}>
-				<Logo />
+				<Link to="/">
+					<Logo />
+				</Link>
 
 				<div className={styles.userContainer}>
-					{isLoggedIn && <p className={styles.userName}>Boris</p>}
-					{!isLoginOrRegistrationPage && <Button buttonText={BUTTON_TEXT} />}
+					{showName && <p className={styles.userName}>{userName}</p>}
+					{<HeaderButton />}
 				</div>
 			</div>
 		</div>

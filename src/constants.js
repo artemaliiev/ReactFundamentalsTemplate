@@ -49,6 +49,7 @@ export const BUTTON_DELETE_COURSE_TEXT = 'Delete';
 export const BUTTON_UPDATE_COURSE_TEXT = 'Update';
 export const BUTTON_SEARCH_COURSE_TEXT = 'Search';
 export const BUTTON_LOGIN_TEXT = 'LOGIN';
+export const BUTTON_REGISTER_TEXT = 'REGISTER';
 
 export const DEFAULT_PLACEHOLDER_TEXT = 'Input text';
 

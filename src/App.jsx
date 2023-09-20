@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from 'react';
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import { Header } from './components/Header/Header';
 import { Login } from './components/Login/Login';
 import { Registration } from './components/Registration/Registration';
+
+import { useLocalStorage } from './helpers/useLocalStorage';
+
 import { Courses } from './components/Courses/Courses';
 import { CourseInfo } from './components/CourseInfo/CourseInfo';
 
@@ -15,7 +18,8 @@ import styles from './App.module.css';
 // Task 2 and 3 - wrap your App with redux Provider and BrowserRouter in src/index.js
 
 function App() {
-	// const [showCourseId, setShowCourseId] = useState(null);
+	const [userName, setUserName] = useLocalStorage("userName", "");
+	const [loginToken, setLoginToken] = useLocalStorage("loginToken", "");
 
 	// const handleShowCourse = courseId => {
 	// 	setShowCourseId(courseId);
@@ -25,34 +29,71 @@ function App() {
 	// 	setShowCourseId(null);
 	// };
 
+	// useEffect(() => {
+	// 	!loginToken ? navigate("/login") : navigate("/courses");
+	// }, [navigate, loginToken]);
+
 	return (
 		<div className={styles.mainWrapper}>
-			<BrowserRouter>
-				<Header />
-					<Routes>
-						<Route
-							path="/"
-							element={<Login />}
-						/>
-						<Route
-							path="/registration"
-							element={
-								<Registration />
-							}
-						/>
-					</Routes>
-				{/* { showCourseId
-					? <CourseInfo
-						coursesList={mockedCoursesList}
-						authorsList={mockedAuthorsList}
-						onBack={onBack}
-						showCourseId={showCourseId}/>
-					: <Courses
-						coursesList={mockedCoursesList}
-						authorsList={mockedAuthorsList}
-						handleShowCourse={handleShowCourse}/>
-				} */}
-			</BrowserRouter>
+			<Header
+				isLoggedIn={loginToken}
+				userName={userName}
+				setLoginToken={setLoginToken}
+				setUserName={setUserName}
+			/>
+			{loginToken ?
+				<Routes>
+					<Route
+						path="/courses"
+						element={
+							<Courses
+								coursesList={mockedCoursesList}
+								authorsList={mockedAuthorsList}
+							/>
+						}
+					/>
+					<Route
+						path="/courses/:courseId"
+						element={
+							<CourseInfo
+								coursesList={mockedCoursesList}
+								authorsList={mockedAuthorsList}
+							/>
+						}
+					/>
+					<Route path='*' element={<Navigate to='/courses' />} />
+				</Routes>
+				:
+				<Routes>
+					<Route
+						path="/login"
+						element={
+							<Login
+								setLoginToken={setLoginToken}
+								setUserName={setUserName}
+							/>
+						}
+					/>
+					<Route
+						path="/registration"
+						element={
+							<Registration />
+						}
+					/>
+					<Route path='*' element={<Navigate to='/login' />} />
+				</Routes>
+			}
+			{/* { showCourseId
+				? <CourseInfo
+					coursesList={mockedCoursesList}
+					authorsList={mockedAuthorsList}
+					onBack={onBack}
+					showCourseId={showCourseId}/>
+				: <Courses
+					coursesList={mockedCoursesList}
+					authorsList={mockedAuthorsList}
+					handleShowCourse={handleShowCourse}/>
+			} */}
 		</div>
 	);
 }

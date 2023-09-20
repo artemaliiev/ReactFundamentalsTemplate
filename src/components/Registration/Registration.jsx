@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Input } from '../../common/Input/Input';
 import { Button } from '../../common/Button/Button';
 
 import { createUser } from '../../services';
 
-import { NAME_LABEL, EMAIL_LABEL, PASSWORD_LABEL, DEFAULT_PLACEHOLDER_TEXT, BUTTON_LOGIN_TEXT } from '../../constants'
+import { NAME_LABEL, EMAIL_LABEL, PASSWORD_LABEL, DEFAULT_PLACEHOLDER_TEXT, BUTTON_REGISTER_TEXT } from '../../constants'
 
 import styles from './styles.module.css';
 
@@ -19,7 +19,8 @@ export const Registration = () => {
     });
     const [submitted, setSubmitted] = useState(false);
     const [valid, setValid] = useState(false);
-    const [errors, setErrors] = React.useState(false);
+    const [formErrors, setFormErrors] = useState(false);
+    const navigate = useNavigate();
 
     const handleInputChange = e => {
         const nextFormState = {
@@ -45,9 +46,9 @@ export const Registration = () => {
     const createServiceCall = async () => {
         try {
             await createUser(values)
-                .then(data => handleServiceResponse(data));
+                .then(response => handleServiceResponse(response));
         } catch(error) {
-            console.log(error);
+            setValid(false);
         }
     }
 
@@ -56,9 +57,12 @@ export const Registration = () => {
             setValid(false);
 
             let errorStr = '';
-            response.errors.forEach(error => errorStr += `<p>${error}</p>`);
-            console.log(errorStr);
-            setErrors(errorStr);
+            response.errors.forEach(error => errorStr += `${error} ,`);
+            setFormErrors(errorStr);
+        }
+
+        if (response.successful) {
+            navigate("/login");
         }
     }
 
@@ -76,7 +80,7 @@ export const Registration = () => {
                     data-testid="nameInput"
                 />
                 {submitted && !values.name && (
-                    <span id="email-error">Please enter an email address</span>
+                    <span id="email-error">Please enter name</span>
                 )}
 
                 <Input
@@ -88,7 +92,7 @@ export const Registration = () => {
                     data-testid="emailInput"
                 />
                 {submitted && !values.email && (
-                    <span id="email-error">Please enter an email address</span>
+                    <span id="email-error">Please enter email address</span>
                 )}
 
                 <Input
@@ -100,12 +104,12 @@ export const Registration = () => {
                     data-testid="passwordInput"
                 />
                 {submitted && !values.password && (
-                    <span id="email-error">Please enter an email address</span>
+                    <span id="email-error">Please enter password</span>
                 )}
 
-                {errors}
+                {formErrors}
 
-				<Button buttonText={BUTTON_LOGIN_TEXT} />
+				<Button buttonText={BUTTON_REGISTER_TEXT} />
 			</form>
 			<p>
 				If you have an account you can&nbsp;

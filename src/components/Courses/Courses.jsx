@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-import styles from './styles.module.css';
-
 import { CourseCard } from './components/CourseCard/CourseCard';
 import { EmptyCourseListComponent } from './components/EmptyCourseListComponent/EmptyCourseListComponent';
 import { CourseSearch } from '../CourseSearch/CourseSearch';
 import { Button } from '../../common';
 
 import { BUTTON_ADD_COURSE_TEXT } from '../../constants'
+
+import styles from './styles.module.css';
 
 export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
 	const [finalCoursesList, setFinalCoursesList] = useState(coursesList);

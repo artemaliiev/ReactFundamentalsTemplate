@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useParams } from "react-router-dom";
 
 import styles from './styles.module.css';
 
@@ -8,16 +9,14 @@ import { Button } from '../../common/Button/Button';
 import { BUTTON_BACK_TEXT } from '../../constants';
 
 export const CourseInfo = ({coursesList, authorsList, onBack, showCourseId}) => {
-	const showCourse = coursesList.find(course => course.id === showCourseId);
+	const {courseId} = useParams();
+	const showCourse = coursesList.find(course => course.id === courseId);
 	const duration = getCourseDuration(showCourse.duration);
 	const showedAuthorsList = authorsList.filter(author => showCourse.authors.includes(author.id));
 
 	return (
 		<>
 			<div className={styles.courseContainer} data-testid='courseInfo'>
-				{ /*// Module 1: reuse Button component for 'onBack' functionality */ }
-				{ /*// Module 2: use 'react-router-dom' 'Link' component for button 'Back'*/ }
-
 				<h1>{showCourse.title}</h1>
 				<div className={styles.courseInfo}>
 					<p className={styles.description}>{showCourse.description}</p>
@@ -44,7 +43,7 @@ export const CourseInfo = ({coursesList, authorsList, onBack, showCourseId}) => 
 						</div>
 					</div>
 				</div>
-				<Button handleClick={()=>onBack()} buttonText={BUTTON_BACK_TEXT} />
+				<Link to="/courses"><Button buttonText={BUTTON_BACK_TEXT} /></Link>
 			</div>
 		</>
 	);

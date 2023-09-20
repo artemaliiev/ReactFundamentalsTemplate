@@ -1,6 +1,5 @@
 import React from 'react';
-
-import styles from './styles.module.css';
+import { Link, useLocation } from "react-router-dom";
 
 import { getCourseDuration, formatCreationDate } from '../../../../helpers';
 
@@ -8,7 +7,10 @@ import { Button } from './../../../../common/Button/Button'
 
 import { BUTTON_SHOW_COURSE_TEXT } from '../../../../constants'
 
+import styles from './styles.module.css';
+
 export const CourseCard = ({course, handleShowCourse, authorsList}) => {
+	const { pathname } = useLocation();
 	const authorIdValueList = [];
 
 	const createAuthorIdValueList = () => {
@@ -51,7 +53,8 @@ export const CourseCard = ({course, handleShowCourse, authorsList}) => {
 					{newDate()}
 				</p>
 				<div>
-					<Button handleClick={()=>handleShowCourse(course.id)} buttonText={BUTTON_SHOW_COURSE_TEXT} />
+					<Link to={`${pathname}/${course.id}`}><Button buttonText={BUTTON_SHOW_COURSE_TEXT} /></Link>
+					{/* <Button handleClick={()=>handleShowCourse(course.id)} buttonText={BUTTON_SHOW_COURSE_TEXT} /> */}
 				</div>
 			</div>
 		</div>
