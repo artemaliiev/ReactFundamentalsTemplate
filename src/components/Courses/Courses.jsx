@@ -14,6 +14,7 @@ export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
 	const handleSearchResult = courseSearchResult => {
 		setFinalCoursesList(courseSearchResult);
 	};
+
 	const isCoursesListNotEmpty = finalCoursesList.length > 0;
 
 	if (isCoursesListNotEmpty) {
