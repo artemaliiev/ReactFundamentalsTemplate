@@ -64,7 +64,7 @@ export const Login = ({setLoginToken, setUserName}) => {
         if (response.successful) {
             setUserName(response.user.name);
             setLoginToken(response.result);
-            // navigate("/");
+            navigate("/");
         }
     }
 
