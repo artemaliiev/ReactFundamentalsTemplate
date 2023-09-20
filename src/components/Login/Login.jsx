@@ -50,7 +50,7 @@ export const Login = ({setLoginToken, setUserName}) => {
         } catch(error) {
             setValid(false);
         }
-    }
+    };
 
     const handleServiceResponse = (response) => {
         if (response.errors) {
@@ -66,7 +66,7 @@ export const Login = ({setLoginToken, setUserName}) => {
             setLoginToken(response.result);
             navigate("/");
         }
-    }
+    };
 
 	return (
 		<div className={styles.container}>
