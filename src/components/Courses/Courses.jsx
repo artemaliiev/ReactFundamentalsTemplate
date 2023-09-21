@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 
 import { CourseCard } from './components/CourseCard/CourseCard';
 import { EmptyCourseListComponent } from './components/EmptyCourseListComponent/EmptyCourseListComponent';
@@ -23,7 +24,7 @@ export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
 				<div className={styles.addNewCourseWrapper}>
 					<CourseSearch coursesList={coursesList} handleSearchResult={handleSearchResult} />
 					<div className={styles.addNewCourseBtnContainer}>
-						<Button buttonText={BUTTON_ADD_COURSE_TEXT} />
+						<Link to="/courses/add"><Button buttonText={BUTTON_ADD_COURSE_TEXT} /></Link>
 					</div>
 				</div>
 				<div className={styles.panel}>

@@ -11,7 +11,6 @@ import { EMAIL_LABEL, PASSWORD_LABEL, DEFAULT_PLACEHOLDER_TEXT, BUTTON_LOGIN_TEX
 import styles from './styles.module.css';
 
 export const Login = ({setLoginToken, setUserName}) => {
-
     const [values, setValues] = useState({
         name: '',
         email: '',

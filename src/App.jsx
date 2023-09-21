@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import { Header } from './components/Header/Header';
@@ -9,6 +9,7 @@ import { useLocalStorage } from './helpers/useLocalStorage';
 
 import { Courses } from './components/Courses/Courses';
 import { CourseInfo } from './components/CourseInfo/CourseInfo';
+import { CourseForm } from './components/CourseForm/CourseForm'
 
 // use mocked data till API implementation
 import { mockedAuthorsList, mockedCoursesList } from './constants';
@@ -20,6 +21,23 @@ import styles from './App.module.css';
 function App() {
 	const [userName, setUserName] = useLocalStorage("userName", "");
 	const [loginToken, setLoginToken] = useLocalStorage("loginToken", "");
+	const [authorsList, setAuthorsList] = useState(mockedAuthorsList);
+	const [coursesList, setCoursesList] = useState(mockedCoursesList);
+
+	const createCourse = course => {
+		setCoursesList(coursesList.push(course));
+	};
+
+	const createAuthor = authorName => {
+		setAuthorsList([
+			...authorsList,
+			{
+				id: (Math.random()*1000).toString(),
+				name: authorName
+			}
+		]);
+	}
+
 
 	// const handleShowCourse = courseId => {
 	// 	setShowCourseId(courseId);
@@ -47,8 +65,8 @@ function App() {
 						path="/courses"
 						element={
 							<Courses
-								coursesList={mockedCoursesList}
-								authorsList={mockedAuthorsList}
+								coursesList={coursesList}
+								authorsList={authorsList}
 							/>
 						}
 					/>
@@ -56,8 +74,18 @@ function App() {
 						path="/courses/:courseId"
 						element={
 							<CourseInfo
-								coursesList={mockedCoursesList}
-								authorsList={mockedAuthorsList}
+								coursesList={coursesList}
+								authorsList={authorsList}
+							/>
+						}
+					/>
+					<Route
+						path="/courses/add"
+						element={
+							<CourseForm
+								authorsList={authorsList}
+								createAuthor={createAuthor}
+								createCourse={createCourse}
 							/>
 						}
 					/>
