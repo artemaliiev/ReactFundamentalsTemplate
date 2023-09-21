@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 import { CreateAuthor } from '../CourseForm/components/CreateAuthor/CreateAuhtor';
 import { Input } from '../../common/Input/Input';
+import { Button } from '../../common/Button/Button';
+import { AuthorItem } from '../CourseForm/components/AuthorItem/AuthorItem'
 
 import { getCourseDuration } from '../../helpers';
 
@@ -12,14 +15,18 @@ export const CourseForm = ({authorsList, createCourse, createAuthor}) => {
     const DURATION_LABEL = 'Duration';
     const INPUT_PLACEHOLDER = 'Input text';
 
+    const navigate = useNavigate();
+
     const [newCourse, setNewCourse] = useState({
-        id: '',
+        id: (Math.random()*1000).toString(),
         title: '',
         decription: '',
-        duration: '',
-        creationDate: '',
-        authors: ''
+        duration: 0,
+        creationDate: new Date(),
+        authors: []
     });
+    const [submitted, setSubmitted] = useState(false);
+    const [selectedAuthors, setSelectedAuthors] = useState([]);
 
     const handleInputChange = e => {
         const nextFormState = {
@@ -30,10 +37,27 @@ export const CourseForm = ({authorsList, createCourse, createAuthor}) => {
         renderDuration();
     };
 
-	//write your code here
+    const setCreationDate = () => {
+        const rawDate = new Date().toJSON().slice(0, 10);
+
+        return `${rawDate.slice(8, 10)}/${rawDate.slice(5, 7)}/${rawDate.slice(0, 4)}`;
+    }
+
     const handleSubmit = e => {
-        // e.preventDefault();
-        console.log(1);
+        e.preventDefault();
+        setSubmitted(true);
+
+        if (newCourse.title && newCourse.decription && newCourse.duration > 0 && newCourse.authors.length > 0) {
+            const nextCourseState = {
+                ...newCourse,
+                creationDate: setCreationDate()
+            }
+            setNewCourse(nextCourseState);
+
+            createCourse(newCourse);
+
+            navigate("/courses");
+        }
     };
 
     const renderDuration = () => {
@@ -48,8 +72,33 @@ export const CourseForm = ({authorsList, createCourse, createAuthor}) => {
         createAuthor(authorName);
     };
 
-    console.log(authorsList);
-    console.log(typeof authorsList);
+    const handleAddAuthor = (e, author) => {
+        e.preventDefault();
+
+        const isAuthorPresent = newCourse.authors.includes(author.id);
+        if (!isAuthorPresent) {
+            // const newCourseAuthors = newCourse.authors;
+            setNewCourse({
+                ...newCourse,
+                authors: [
+                    ...newCourse.authors,
+                    author.id
+                ]
+            });
+
+            setSelectedAuthors([
+                ...selectedAuthors,
+                {
+                    id: author.id,
+                    name: author.name
+                }
+            ]);
+        }
+    }
+
+    const SelectedAuthor = ({author}) => {
+        return <p data-testid="selectedAuthor">{author.name}</p>;
+    };
 
 	return (
         <>
@@ -68,6 +117,9 @@ export const CourseForm = ({authorsList, createCourse, createAuthor}) => {
                         onChange={handleInputChange}
                         data-testid="titleInput"
                     />
+                    {submitted && !newCourse.title && (
+                        <span className="formError">Title is required.</span>
+                    )}
                 </div>
 
                 <label>
@@ -79,10 +131,14 @@ export const CourseForm = ({authorsList, createCourse, createAuthor}) => {
                         onChange={handleInputChange}
                         data-testid="descriptionTextArea"
                     />
+                    {submitted && !newCourse.decription && (
+                        <span className="formError">Description is required.</span>
+                    )}
                 </label>
 
                 <h3>Duration</h3>
 
+                <p>Duration: </p>
                 <div>
                     <Input
                         labelText={DURATION_LABEL}
@@ -92,8 +148,10 @@ export const CourseForm = ({authorsList, createCourse, createAuthor}) => {
                         onChange={handleInputChange}
                         data-testid="durationInput"
                     />
+                    {submitted && !newCourse.duration && (
+                        <span className="formError">Duration is required.</span>
+                    )}
                 </div>
-                <p>Duration: </p>
                 {renderDuration(newCourse.duration)}
 
                 <div className={styles.infoWrapper}>
@@ -109,13 +167,24 @@ export const CourseForm = ({authorsList, createCourse, createAuthor}) => {
 
                         {/* use 'map' to display all available autors. Reuse 'AuthorItem' component for each author */}
 
+                        {authorsList.map(author => (
+                            <AuthorItem
+                                key={author.id}
+                                author={author}
+                                handleAddAuthor={handleAddAuthor}
+                            />
+                        ))}
                         <strong>Course authors</strong>
+                        {selectedAuthors.map(author => (
+                            <SelectedAuthor
+                                key={author.id}
+                                author={author}
+                            />
+                        ))}
 
-                        {/* use 'map' to display course's autors */}
-                        {/* <p data-testid="selectedAuthor"}>{author.name}</p> */}
-
-                        <p className={styles.notification}>List is empty</p> {/* display this paragraph if there are no authors in the course */}
+                        {selectedAuthors.length === 0 && <p className={styles.notification}>List is empty</p>}
                     </div>
+                    <Button buttonText='Create Course' data-testid="createCourseButton"/>
                 </div>
             </form>
         </>

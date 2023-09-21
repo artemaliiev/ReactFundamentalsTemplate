@@ -11,50 +11,45 @@ import { EMAIL_LABEL, PASSWORD_LABEL, DEFAULT_PLACEHOLDER_TEXT, BUTTON_LOGIN_TEX
 import styles from './styles.module.css';
 
 export const Login = ({setLoginToken, setUserName}) => {
-    const [values, setValues] = useState({
-        name: '',
-        email: '',
-        password: '',
-    });
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [submitted, setSubmitted] = useState(false);
-    const [valid, setValid] = useState(false);
     const [formErrors, setFormErrors] = useState(false);
     const navigate = useNavigate();
 
-    const handleInputChange = e => {
-        const nextFormState = {
-            ...values,
-            [e.target.name]: e.target.value,
-        };
-        setValues(nextFormState);
+    const handleEmailChange = e => {
+        setEmail(e.target.value);
+    };
+
+    const handlePasswordChange = e => {
+        setPassword(e.target.value);
     };
 
 	const handleSubmit = e => {
         e.preventDefault();
         setSubmitted(true);
 
-        if (values.email && values.password) {
-            setValid(true);
-        }
-
-        if (valid) {
-            createServiceCall();
+        if (email && password) {
+            const userData = {
+                email,
+                password
+            };
+            createServiceCall(userData);
         }
     };
 
-    const createServiceCall = async () => {
+    const createServiceCall = async (userData) => {
+
         try {
-            await login(values)
+            await login(userData)
                 .then(response => handleServiceResponse(response));
         } catch(error) {
-            setValid(false);
+            setFormErrors('Default error');
         }
     };
 
     const handleServiceResponse = (response) => {
         if (response.errors) {
-            setValid(false);
-
             let errorStr = '';
             response.errors.forEach(error => errorStr += `${error} ,`);
             setFormErrors(errorStr);
@@ -75,25 +70,23 @@ export const Login = ({setLoginToken, setUserName}) => {
 				<Input
                     labelText={EMAIL_LABEL}
                     placeholderText={DEFAULT_PLACEHOLDER_TEXT}
-                    name="email"
-                    value={values.email}
-                    onChange={handleInputChange}
+                    value={email}
+                    onChange={handleEmailChange}
                     data-testid="emailInput"
                 />
-                {submitted && !values.email && (
-                    <span id="email-error">Please enter email address</span>
+                {submitted && !email && (
+                    <span className="formError">Email is required.</span>
                 )}
 
                 <Input
                     labelText={PASSWORD_LABEL}
                     placeholderText={DEFAULT_PLACEHOLDER_TEXT}
-                    name="password"
-                    value={values.password}
-                    onChange={handleInputChange}
+                    value={password}
+                    onChange={handlePasswordChange}
                     data-testid="passwordInput"
                 />
-                {submitted && !values.password && (
-                    <span id="email-error">Please enter password</span>
+                {submitted && !password && (
+                    <span className="formError">Password is required.</span>
                 )}
 
                 {formErrors}
@@ -101,7 +94,7 @@ export const Login = ({setLoginToken, setUserName}) => {
 				<Button buttonText={BUTTON_LOGIN_TEXT} />
 			</form>
 			<p>
-                If you don't have an account you may&nbsp;
+                If you don't have an account you can &nbsp;
 				<b><Link to="/registration">register</Link></b>
 			</p>
 		</div>

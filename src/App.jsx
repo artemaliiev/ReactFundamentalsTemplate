@@ -20,23 +20,40 @@ import styles from './App.module.css';
 
 function App() {
 	const [userName, setUserName] = useLocalStorage("userName", "");
-	const [loginToken, setLoginToken] = useLocalStorage("loginToken", "");
+	const [loginToken, setLoginToken] = useLocalStorage("token", "");
 	const [authorsList, setAuthorsList] = useState(mockedAuthorsList);
 	const [coursesList, setCoursesList] = useState(mockedCoursesList);
 
 	const createCourse = course => {
-		setCoursesList(coursesList.push(course));
+		const isCoursePresent = coursesList.find(courseItem => courseItem.id === course.id);
+
+		if (!isCoursePresent) {
+			setCoursesList([
+				...coursesList, {
+					id: course.id,
+					title: course.title,
+					decription: course.decription,
+					duration: Number(course.duration),
+					creationDate: course.creationDate,
+					authors: course.authors
+				}
+			])
+		}
 	};
 
 	const createAuthor = authorName => {
-		setAuthorsList([
-			...authorsList,
-			{
-				id: (Math.random()*1000).toString(),
-				name: authorName
-			}
-		]);
-	}
+		const isAuthorPresent = authorsList.find(authorItem => authorItem.name === authorName);
+
+		if (!isAuthorPresent) {
+			setAuthorsList([
+				...authorsList,
+				{
+					id: (Math.random()*1000).toString(),
+					name: authorName
+				}
+			]);
+		}
+	};
 
 
 	// const handleShowCourse = courseId => {

@@ -18,7 +18,6 @@ export const Registration = () => {
         password: '',
     });
     const [submitted, setSubmitted] = useState(false);
-    const [valid, setValid] = useState(false);
     const [formErrors, setFormErrors] = useState(false);
     const navigate = useNavigate();
 
@@ -35,10 +34,6 @@ export const Registration = () => {
         setSubmitted(true);
 
         if (values.name && values.email && values.password) {
-            setValid(true);
-        }
-
-        if (valid) {
             createServiceCall();
         }
     };
@@ -48,14 +43,12 @@ export const Registration = () => {
             await createUser(values)
                 .then(response => handleServiceResponse(response));
         } catch(error) {
-            setValid(false);
+            setFormErrors('Default error');
         }
-    }
+    };
 
     const handleServiceResponse = (response) => {
         if (response.errors) {
-            setValid(false);
-
             let errorStr = '';
             response.errors.forEach(error => errorStr += `${error} ,`);
             setFormErrors(errorStr);
@@ -80,7 +73,7 @@ export const Registration = () => {
                     data-testid="nameInput"
                 />
                 {submitted && !values.name && (
-                    <span id="email-error">Please enter name</span>
+                    <span className="formError">Name is required.</span>
                 )}
 
                 <Input
@@ -92,7 +85,7 @@ export const Registration = () => {
                     data-testid="emailInput"
                 />
                 {submitted && !values.email && (
-                    <span id="email-error">Please enter email address</span>
+                    <span className="formError">Email is required.</span>
                 )}
 
                 <Input
@@ -104,7 +97,7 @@ export const Registration = () => {
                     data-testid="passwordInput"
                 />
                 {submitted && !values.password && (
-                    <span id="email-error">Please enter password</span>
+                    <span className="formError">Password is required.</span>
                 )}
 
                 {formErrors}
@@ -113,7 +106,7 @@ export const Registration = () => {
 			</form>
 			<p>
 				If you have an account you can&nbsp;
-				<b><Link to="/">log in</Link></b>
+				<b><Link to="/login">log in</Link></b>
 			</p>
 		</div>
 	);
