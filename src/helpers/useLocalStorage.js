@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
 function getStorageValue(key, defaultValue) {
-  const saved = localStorage.getItem(key);
-  const initial = JSON.parse(saved);
+  const initial = localStorage.getItem(key);
   return initial || defaultValue;
 }
 
