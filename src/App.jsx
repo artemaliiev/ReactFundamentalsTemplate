@@ -19,8 +19,8 @@ import styles from './App.module.css';
 // Task 2 and 3 - wrap your App with redux Provider and BrowserRouter in src/index.js
 
 function App() {
-	const [userName, setUserName] = useLocalStorage("userName", "");
-	const [loginToken, setLoginToken] = useLocalStorage("token", "");
+	const [userName, setUserName] = useLocalStorage("userName", null);
+	const [loginToken, setLoginToken] = useLocalStorage("token", null);
 	const [authorsList, setAuthorsList] = useState(mockedAuthorsList);
 	const [coursesList, setCoursesList] = useState(mockedCoursesList);
 

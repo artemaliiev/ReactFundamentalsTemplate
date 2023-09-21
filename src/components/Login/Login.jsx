@@ -39,7 +39,6 @@ export const Login = ({setLoginToken, setUserName}) => {
     };
 
     const createServiceCall = async (userData) => {
-
         try {
             await login(userData)
                 .then(response => handleServiceResponse(response));
@@ -95,7 +94,11 @@ export const Login = ({setLoginToken, setUserName}) => {
 			</form>
 			<p>
                 If you don't have an account you can &nbsp;
-				<b><Link to="/registration">register</Link></b>
+				<b>
+                    <Link to="/registration">
+                        registration
+                    </Link>
+                </b>
 			</p>
 		</div>
 	);

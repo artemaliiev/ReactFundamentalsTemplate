@@ -106,7 +106,7 @@ export const Registration = () => {
 			</form>
 			<p>
 				If you have an account you can&nbsp;
-				<b><Link to="/login">log in</Link></b>
+				<b><Link to="/login">login</Link></b>
 			</p>
 		</div>
 	);

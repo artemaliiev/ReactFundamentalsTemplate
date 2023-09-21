@@ -18,8 +18,8 @@ export const Header = ({isLoggedIn, userName, setLoginToken, setUserName}) => {
 	};
 
 	const HeaderButton = () => {
-		if (!isLoginOrRegistrationPage) {
-			return isLoggedIn ? <Button handleClick={handleLogOut} buttonText="Logout" /> : <Button buttonText="Login" />;
+		if (!isLoginOrRegistrationPage && isLoggedIn) {
+			return <Button handleClick={handleLogOut} buttonText="Logout" />;
 		}
 	};
 
