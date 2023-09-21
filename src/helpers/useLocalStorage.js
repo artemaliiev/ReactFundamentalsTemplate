@@ -15,7 +15,7 @@ export const useLocalStorage = (key, defaultValue) => {
         if (value === null) {
             localStorage.removeItem(key);
         } else {
-            localStorage.setItem(key, JSON.stringify(value));
+            localStorage.setItem(key, value.toString());
         }
     }, [key, value]);
 
