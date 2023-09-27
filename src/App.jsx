@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import { Header } from './components/Header/Header';
@@ -34,10 +34,12 @@ function App() {
 	}, [dispatch]);
 
 
-	const [userName, setUserName] = useLocalStorage("userName", null);
 	const [loginToken, setLoginToken] = useLocalStorage("token", null);
-	const [authorsList, setAuthorsList] = useState(useSelector(getAuthors));
-	const [coursesList, setCoursesList] = useState(useSelector(getCourses));
+	// const [authorsList, setAuthorsList] = useState(useSelector(getAuthors));
+	// const [coursesList, setCoursesList] = useState(useSelector(getCourses));
+	// console.log(useSelector(getCourses));
+	const coursesList = useSelector(getCourses);
+	const authorsList = useSelector(getAuthors);
 
 	// const createServiceCall = async dispatch => {
 	// 	await getCourses()
@@ -54,70 +56,50 @@ function App() {
 
 	
 
-	// console.log(courses);
+	// 
 	// console.log(getCourses());
 
 	// dispatch({type: 'courses', mockedCoursesList});
 
+	// const createCourse = course => {
+
+		// const isCoursePresent = coursesList.find(courseItem => courseItem.id === course.id);
+
+		// if (!isCoursePresent) {
+		// 	setCoursesList([
+		// 		...coursesList, {
+		// 			id: course.id,
+		// 			title: course.title,
+		// 			decription: course.decription,
+		// 			duration: Number(course.duration),
+		// 			creationDate: course.creationDate,
+		// 			authors: course.authors
+		// 		}
+		// 	])
+		// }
 
 
-	
-
-	console.log(22);
-
-	console.log(useSelector(state => state));
-
-	const createCourse = course => {
-		const isCoursePresent = coursesList.find(courseItem => courseItem.id === course.id);
-
-		if (!isCoursePresent) {
-			setCoursesList([
-				...coursesList, {
-					id: course.id,
-					title: course.title,
-					decription: course.decription,
-					duration: Number(course.duration),
-					creationDate: course.creationDate,
-					authors: course.authors
-				}
-			])
-		}
-	};
-
-	const createAuthor = authorName => {
-		const isAuthorPresent = authorsList.find(authorItem => authorItem.name === authorName);
-
-		if (!isAuthorPresent) {
-			setAuthorsList([
-				...authorsList,
-				{
-					id: (Math.random()*1000).toString(),
-					name: authorName
-				}
-			]);
-		}
-	};
-
-
-	// const handleShowCourse = courseId => {
-	// 	setShowCourseId(courseId);
 	// };
 
-	// const onBack = () => {
-	// 	setShowCourseId(null);
-	// };
+	// const createAuthor = authorName => {
+	// 	const isAuthorPresent = authorsList.find(authorItem => authorItem.name === authorName);
 
-	// useEffect(() => {
-	// 	!loginToken ? navigate("/login") : navigate("/courses");
-	// }, [navigate, loginToken]);
+	// 	if (!isAuthorPresent) {
+	// 		setAuthorsList([
+	// 			...authorsList,
+	// 			{
+	// 				id: (Math.random()*1000).toString(),
+	// 				name: authorName
+	// 			}
+	// 		]);
+	// 	}
+	// };
 
 	return (
 		<div className={styles.mainWrapper}>
 			<Header
 				isLoggedIn={loginToken}
-				userName={userName}
 				setLoginToken={setLoginToken}
-				setUserName={setUserName}
 			/>
 			{loginToken ?
 				<Routes>
@@ -144,8 +126,8 @@ function App() {
 						element={
 							<CourseForm
 								authorsList={authorsList}
-								createAuthor={createAuthor}
-								createCourse={createCourse}
+								// createAuthor={createAuthor}
+								// createCourse={createCourse}
 							/>
 						}
 					/>
@@ -158,7 +140,6 @@ function App() {
 						element={
 							<Login
 								setLoginToken={setLoginToken}
-								setUserName={setUserName}
 							/>
 						}
 					/>

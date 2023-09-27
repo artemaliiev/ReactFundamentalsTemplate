@@ -4,18 +4,23 @@ import { Link, useNavigate } from "react-router-dom";
 import { Input } from '../../common/Input/Input';
 import { Button } from '../../common/Button/Button';
 
+import { useDispatch } from "react-redux";
+import { setUserData } from '../../store/slices/userSlice';
+
 import { login } from '../../services';
 
 import { EMAIL_LABEL, PASSWORD_LABEL, DEFAULT_PLACEHOLDER_TEXT, BUTTON_LOGIN_TEXT } from '../../constants'
 
 import styles from './styles.module.css';
 
-export const Login = ({setLoginToken, setUserName}) => {
+export const Login = ({setLoginToken}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [formErrors, setFormErrors] = useState(false);
     const navigate = useNavigate();
+
+    const dispatch = useDispatch();
 
     const handleEmailChange = e => {
         setEmail(e.target.value);
@@ -55,7 +60,12 @@ export const Login = ({setLoginToken, setUserName}) => {
         }
 
         if (response.successful) {
-            setUserName(response.user.name);
+            dispatch(setUserData({
+                isAuth: true,
+                name: response.user.name,
+                email: response.user.email,
+                token: response.result,
+            }));
             setLoginToken(response.result);
             navigate("/");
         }

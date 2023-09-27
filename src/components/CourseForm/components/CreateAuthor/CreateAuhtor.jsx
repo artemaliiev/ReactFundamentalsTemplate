@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 
+import { useDispatch } from "react-redux";
+import { saveAuthor } from '../../../../store/slices/authorsSlice';
+
 import { Input } from '../../../../common/Input/Input';
 import { Button } from '../../../../common/Button/Button';
 
 export const CreateAuthor = ({onCreateAuthor}) => {
+	const dispatch = useDispatch();
+
     const [authorName, setAuthorName] = useState('');
 
     const handleChange = e => {
@@ -12,7 +17,13 @@ export const CreateAuthor = ({onCreateAuthor}) => {
 
     const handleCreate = e => {
         e.preventDefault();
-        onCreateAuthor(authorName);
+        // onCreateAuthor(authorName);
+        dispatch(
+            saveAuthor({
+                name: authorName,
+                id: (Math.random()*1000).toString()
+            })
+        );
     };
 
     return (

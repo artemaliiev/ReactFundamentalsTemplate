@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+import { saveCourse } from '../../store/slices/coursesSlice';
 
 import { CreateAuthor } from '../CourseForm/components/CreateAuthor/CreateAuhtor';
 import { Input } from '../../common/Input/Input';
@@ -14,15 +17,22 @@ export const CourseForm = ({authorsList, createCourse, createAuthor}) => {
     const TITLE_LABEL = 'Title';
     const DURATION_LABEL = 'Duration';
     const INPUT_PLACEHOLDER = 'Input text';
+	const dispatch = useDispatch();
 
     const navigate = useNavigate();
+
+    const setCreationDate = () => {
+        const rawDate = new Date().toJSON().slice(0, 10);
+
+        return `${rawDate.slice(8, 10)}/${rawDate.slice(5, 7)}/${rawDate.slice(0, 4)}`;
+    }
 
     const [newCourse, setNewCourse] = useState({
         id: (Math.random()*1000).toString(),
         title: '',
         decription: '',
         duration: 0,
-        creationDate: new Date(),
+        creationDate: setCreationDate(),
         authors: []
     });
     const [submitted, setSubmitted] = useState(false);
@@ -37,24 +47,19 @@ export const CourseForm = ({authorsList, createCourse, createAuthor}) => {
         renderDuration();
     };
 
-    const setCreationDate = () => {
-        const rawDate = new Date().toJSON().slice(0, 10);
-
-        return `${rawDate.slice(8, 10)}/${rawDate.slice(5, 7)}/${rawDate.slice(0, 4)}`;
-    }
-
     const handleSubmit = e => {
         e.preventDefault();
         setSubmitted(true);
 
         if (newCourse.title && newCourse.decription && newCourse.duration > 0 && newCourse.authors.length > 0) {
-            const nextCourseState = {
-                ...newCourse,
-                creationDate: setCreationDate()
-            }
-            setNewCourse(nextCourseState);
+            // const nextCourseState = {
+            //     ...newCourse,
+            //     creationDate: creationDate
+            // }
+            setNewCourse(newCourse);
 
-            createCourse(newCourse);
+            // createCourse(newCourse);
+            dispatch(saveCourse(newCourse));
 
             navigate("/courses");
         }

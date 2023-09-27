@@ -10,7 +10,10 @@ export const authorsSlice = createSlice({
 		setAuthors: (state, {payload}) => {
             return state = payload;
         },
-		// saveAuthor: 
+		saveAuthor: (state, {payload}) => {
+			const isAuthorExists = state.find(author => author.id === payload.id);
+            return isAuthorExists ? state : state.concat(payload);
+        },
 	},
 });
 
@@ -19,7 +22,7 @@ export const { setAuthors, saveAuthor } = authorsSlice.actions;
 
 export const fetchAuthors = () => async dispatch => {
 	try {
-		await getAuthors()
+		getAuthors()
 			.then(response => dispatch(setAuthors(response.result)));
 	} catch(error) {
 		console.log('Default error');

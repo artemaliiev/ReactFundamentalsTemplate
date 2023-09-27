@@ -5,6 +5,9 @@ import { getCourseDuration, formatCreationDate } from '../../../../helpers';
 
 import { Button } from './../../../../common/Button/Button'
 
+import { useDispatch } from "react-redux";
+import { deleteCourse } from '../../../../store/slices/coursesSlice';
+
 import { BUTTON_SHOW_COURSE_TEXT } from '../../../../constants'
 
 import styles from './styles.module.css';
@@ -12,6 +15,7 @@ import styles from './styles.module.css';
 export const CourseCard = ({course, handleShowCourse, authorsList}) => {
 	const { pathname } = useLocation();
 	const authorIdValueList = [];
+	const dispatch = useDispatch();
 
 	const createAuthorIdValueList = () => {
 		authorsList.forEach(author => authorIdValueList[author.id] = author.name);
@@ -24,6 +28,10 @@ export const CourseCard = ({course, handleShowCourse, authorsList}) => {
 			return acc ? acc += `, ${authorIdValueList[author]}` : authorIdValueList[author];
 		}, '');
 	};
+
+	const handleDeleteCourse = courseId => {
+		dispatch(deleteCourse({id: courseId}));
+	}
 
 	const formattedDate = formatCreationDate(course.creationDate);
 
@@ -48,6 +56,8 @@ export const CourseCard = ({course, handleShowCourse, authorsList}) => {
 				</p>
 				<div>
 					<Link to={`${pathname}/${course.id}`}><Button buttonText={BUTTON_SHOW_COURSE_TEXT} /></Link>
+					<Button handleClick={()=>handleDeleteCourse(course.id)} buttonText="Delete" data-testid="deleteCourse"/>
+					<Button buttonText="Update" data-testid="updateCourse"/>
 					{/* <Button handleClick={()=>handleShowCourse(course.id)} buttonText={BUTTON_SHOW_COURSE_TEXT} /> */}
 				</div>
 			</div>

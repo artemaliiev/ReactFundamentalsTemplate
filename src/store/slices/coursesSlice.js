@@ -10,8 +10,14 @@ export const coursesSlice = createSlice({
 		setCourses: (state, {payload}) => {
             return state = payload;
         },
-		// saveCourse: 
-		// deleteCourse: 
+		saveCourse: (state, {payload}) => {
+			const isCourseExists = state.find(course => course.id === payload.id);
+            return isCourseExists ? state : state.concat(payload);
+        },
+		deleteCourse: (state, {payload}) => {
+			const newState = state.filter(course => course.id !== payload.id);
+            return newState;
+        },
 		// updateCourse: 
 	},
 });

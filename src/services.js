@@ -26,14 +26,9 @@ export const login = async (data) => {
   return result;
 };
 
-export const getCourses = async () => {
-  const response = await fetch('http://localhost:4000/courses/all', {
-      method: 'GET'
-  });
-
-  const result = await response.json();
-
-  return result;
+export const getCourses = () => {
+  return fetch('http://localhost:4000/courses/all')
+        .then(resoponse => resoponse.json());
 };
 
 export const getAuthors = async () => {

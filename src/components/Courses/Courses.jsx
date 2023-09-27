@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 
 import { CourseCard } from './components/CourseCard/CourseCard';
@@ -11,24 +11,24 @@ import { BUTTON_ADD_COURSE_TEXT } from '../../constants'
 import styles from './styles.module.css';
 
 export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
-	const [finalCoursesList, setFinalCoursesList] = useState(coursesList);
-	const handleSearchResult = courseSearchResult => {
-		setFinalCoursesList(courseSearchResult);
-	};
+	// const [finalCoursesList, setFinalCoursesList] = useState(coursesList);
+	// const handleSearchResult = courseSearchResult => {
+	// 	setFinalCoursesList(courseSearchResult);
+	// };
 
-	const isCoursesListNotEmpty = finalCoursesList.length > 0;
+	const isCoursesListNotEmpty = coursesList.length > 0;
 
 	if (isCoursesListNotEmpty) {
 		return (
 			<>
 				<div className={styles.addNewCourseWrapper}>
-					<CourseSearch coursesList={coursesList} handleSearchResult={handleSearchResult} />
+					<CourseSearch coursesList={coursesList}  />
 					<div className={styles.addNewCourseBtnContainer}>
 						<Link to="/courses/add"><Button buttonText={BUTTON_ADD_COURSE_TEXT} /></Link>
 					</div>
 				</div>
 				<div className={styles.panel}>
-					{finalCoursesList.map(courseItem => (
+					{coursesList.map(courseItem => (
 						<CourseCard
 							key={courseItem.id}
 							course={courseItem}
