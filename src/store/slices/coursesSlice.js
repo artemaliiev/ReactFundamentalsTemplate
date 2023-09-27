@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 import { getCourses } from './../../services';
+
 const initialState = [];
 
 export const coursesSlice = createSlice({

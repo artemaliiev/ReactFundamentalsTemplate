@@ -37,7 +37,13 @@ export const getCourses = async () => {
 };
 
 export const getAuthors = async () => {
-  // write your code here
+  const response = await fetch('http://localhost:4000/authors/all', {
+      method: 'GET'
+  });
+
+  const result = await response.json();
+
+  return result;
 };
 
 export const getCurrentUser = async () => {

@@ -13,19 +13,31 @@ import { CourseForm } from './components/CourseForm/CourseForm'
 
 // import { getCourses } from './services';
 import { fetchCourses } from './store/slices/coursesSlice';
+import { fetchAuthors } from './store/slices/authorsSlice';
+import { getCourses, getAuthors } from './store/selectors';
 
 import { useSelector, useDispatch } from "react-redux";
 
 // use mocked data till API implementation
-import { mockedAuthorsList, mockedCoursesList } from './constants';
+// import { mockedAuthorsList, mockedCoursesList } from './constants';
 
 import styles from './App.module.css';
 
 function App() {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchCourses());
+	}, [dispatch]);
+
+	useEffect(() => {
+		dispatch(fetchAuthors());
+	}, [dispatch]);
+
+
 	const [userName, setUserName] = useLocalStorage("userName", null);
 	const [loginToken, setLoginToken] = useLocalStorage("token", null);
-	const [authorsList, setAuthorsList] = useState(mockedAuthorsList);
-	const [coursesList, setCoursesList] = useState(mockedCoursesList);
+	const [authorsList, setAuthorsList] = useState(useSelector(getAuthors));
+	const [coursesList, setCoursesList] = useState(useSelector(getCourses));
 
 	// const createServiceCall = async dispatch => {
 	// 	await getCourses()
@@ -40,16 +52,13 @@ function App() {
 
 	// createServiceCall();
 
-	const dispatch = useDispatch()
+	
 
 	// console.log(courses);
 	// console.log(getCourses());
 
 	// dispatch({type: 'courses', mockedCoursesList});
 
-	useEffect(() => {
-		dispatch(fetchCourses());
-	}, [dispatch]);
 
 
 	

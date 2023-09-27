@@ -5,6 +5,7 @@
   border-left: 5px solid #333E48;
   justify-content: space-between;
   gap: 16px;
+  width: 100%;
   max-width: 1000px;
   margin: 0 auto;
   border-radius: 4px;
