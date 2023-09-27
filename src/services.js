@@ -27,7 +27,13 @@ export const login = async (data) => {
 };
 
 export const getCourses = async () => {
-  // write your code here
+  const response = await fetch('http://localhost:4000/courses/all', {
+      method: 'GET'
+  });
+
+  const result = await response.json();
+
+  return result;
 };
 
 export const getAuthors = async () => {

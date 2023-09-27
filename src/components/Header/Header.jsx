@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from 'react-redux';
+
+import { getUser } from './../../store/selectors';
 
 import { Logo } from './components/Logo/Logo'
 import { Button } from '../../common/Button/Button'
@@ -7,6 +10,8 @@ import { Button } from '../../common/Button/Button'
 import styles from './styles.module.css';
 
 export const Header = ({isLoggedIn, userName, setLoginToken, setUserName}) => {
+	console.log(useSelector(getUser));
+	console.log(useSelector((state) => state));
 	const { pathname } = useLocation();
 	const isLoginOrRegistrationPage = pathname === '/login' || pathname === '/registration';
 

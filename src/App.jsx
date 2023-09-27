@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import { Header } from './components/Header/Header';
@@ -11,18 +11,52 @@ import { Courses } from './components/Courses/Courses';
 import { CourseInfo } from './components/CourseInfo/CourseInfo';
 import { CourseForm } from './components/CourseForm/CourseForm'
 
+// import { getCourses } from './services';
+import { fetchCourses } from './store/slices/coursesSlice';
+
+import { useSelector, useDispatch } from "react-redux";
+
 // use mocked data till API implementation
 import { mockedAuthorsList, mockedCoursesList } from './constants';
 
 import styles from './App.module.css';
-
-// Task 2 and 3 - wrap your App with redux Provider and BrowserRouter in src/index.js
 
 function App() {
 	const [userName, setUserName] = useLocalStorage("userName", null);
 	const [loginToken, setLoginToken] = useLocalStorage("token", null);
 	const [authorsList, setAuthorsList] = useState(mockedAuthorsList);
 	const [coursesList, setCoursesList] = useState(mockedCoursesList);
+
+	// const createServiceCall = async dispatch => {
+	// 	await getCourses()
+    //             .then(response => dispatch(setCourses(response)));
+    //     try {
+    //         await getCourses()
+    //             .then(response => dispatch(setCourses(response)));
+    //     } catch(error) {
+    //         console.log('Default error');
+    //     }
+    // };
+
+	// createServiceCall();
+
+	const dispatch = useDispatch()
+
+	// console.log(courses);
+	// console.log(getCourses());
+
+	// dispatch({type: 'courses', mockedCoursesList});
+
+	useEffect(() => {
+		dispatch(fetchCourses());
+	}, [dispatch]);
+
+
+	
+
+	console.log(22);
+
+	console.log(useSelector(state => state));
 
 	const createCourse = course => {
 		const isCoursePresent = coursesList.find(courseItem => courseItem.id === course.id);
