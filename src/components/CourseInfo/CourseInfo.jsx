@@ -11,6 +11,9 @@ import { BUTTON_BACK_TEXT } from '../../constants';
 export const CourseInfo = ({coursesList, authorsList, onBack, showCourseId}) => {
 	const {courseId} = useParams();
 	const showCourse = coursesList.find(course => course.id === courseId);
+	if (!showCourse) {
+		return '';
+	}
 	const duration = getCourseDuration(showCourse.duration);
 	const showedAuthorsList = authorsList.filter(author => showCourse.authors.includes(author.id));
 

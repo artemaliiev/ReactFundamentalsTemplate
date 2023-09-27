@@ -35,65 +35,8 @@ function App() {
 
 
 	const [loginToken, setLoginToken] = useLocalStorage("token", null);
-	// const [authorsList, setAuthorsList] = useState(useSelector(getAuthors));
-	// const [coursesList, setCoursesList] = useState(useSelector(getCourses));
-	// console.log(useSelector(getCourses));
 	const coursesList = useSelector(getCourses);
 	const authorsList = useSelector(getAuthors);
-
-	// const createServiceCall = async dispatch => {
-	// 	await getCourses()
-    //             .then(response => dispatch(setCourses(response)));
-    //     try {
-    //         await getCourses()
-    //             .then(response => dispatch(setCourses(response)));
-    //     } catch(error) {
-    //         console.log('Default error');
-    //     }
-    // };
-
-	// createServiceCall();
-
-	
-
-	// 
-	// console.log(getCourses());
-
-	// dispatch({type: 'courses', mockedCoursesList});
-
-	// const createCourse = course => {
-
-		// const isCoursePresent = coursesList.find(courseItem => courseItem.id === course.id);
-
-		// if (!isCoursePresent) {
-		// 	setCoursesList([
-		// 		...coursesList, {
-		// 			id: course.id,
-		// 			title: course.title,
-		// 			decription: course.decription,
-		// 			duration: Number(course.duration),
-		// 			creationDate: course.creationDate,
-		// 			authors: course.authors
-		// 		}
-		// 	])
-		// }
-
-
-	// };
-
-	// const createAuthor = authorName => {
-	// 	const isAuthorPresent = authorsList.find(authorItem => authorItem.name === authorName);
-
-	// 	if (!isAuthorPresent) {
-	// 		setAuthorsList([
-	// 			...authorsList,
-	// 			{
-	// 				id: (Math.random()*1000).toString(),
-	// 				name: authorName
-	// 			}
-	// 		]);
-	// 	}
-	// };
 
 	return (
 		<div className={styles.mainWrapper}>
@@ -126,8 +69,6 @@ function App() {
 						element={
 							<CourseForm
 								authorsList={authorsList}
-								// createAuthor={createAuthor}
-								// createCourse={createCourse}
 							/>
 						}
 					/>
@@ -152,17 +93,6 @@ function App() {
 					<Route path='*' element={<Navigate to='/login' />} />
 				</Routes>
 			}
-			{/* { showCourseId
-				? <CourseInfo
-					coursesList={mockedCoursesList}
-					authorsList={mockedAuthorsList}
-					onBack={onBack}
-					showCourseId={showCourseId}/>
-				: <Courses
-					coursesList={mockedCoursesList}
-					authorsList={mockedAuthorsList}
-					handleShowCourse={handleShowCourse}/>
-			} */}
 		</div>
 	);
 }
