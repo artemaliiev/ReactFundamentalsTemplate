@@ -6,8 +6,6 @@ import { EmptyCourseListComponent } from './components/EmptyCourseListComponent/
 import { CourseSearch } from '../CourseSearch/CourseSearch';
 import { Button } from '../../common';
 
-import { BUTTON_ADD_COURSE_TEXT } from '../../constants'
-
 import styles from './styles.module.css';
 
 export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
@@ -24,7 +22,7 @@ export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
 				<div className={styles.addNewCourseWrapper}>
 					<CourseSearch coursesList={coursesList}  />
 					<div className={styles.addNewCourseBtnContainer}>
-						<Link to="/courses/add"><Button buttonText={BUTTON_ADD_COURSE_TEXT} /></Link>
+						<Link to="/courses/add"><Button buttonText='Add new' data-testid="addCourse" /></Link>
 					</div>
 				</div>
 				<div className={styles.panel}>

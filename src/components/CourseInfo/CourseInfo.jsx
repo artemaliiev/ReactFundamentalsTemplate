@@ -14,6 +14,7 @@ export const CourseInfo = ({coursesList, authorsList, onBack, showCourseId}) => 
 	if (!showCourse) {
 		return '';
 	}
+
 	const duration = getCourseDuration(showCourse.duration);
 	const showedAuthorsList = authorsList.filter(author => showCourse.authors.includes(author.id));
 
