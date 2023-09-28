@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 import { getCourseDuration, formatCreationDate } from '../../../../helpers';
@@ -8,14 +9,18 @@ import { Button } from './../../../../common/Button/Button'
 import { useDispatch } from "react-redux";
 import { deleteCourse } from '../../../../store/slices/coursesSlice';
 
+import { getAuthorsList } from '../../../../store/selectors';
+
 import { BUTTON_SHOW_COURSE_TEXT } from '../../../../constants'
 
 import styles from './styles.module.css';
 
-export const CourseCard = ({course, handleShowCourse, authorsList}) => {
+export const CourseCard = ({course, handleShowCourse}) => {
 	const { pathname } = useLocation();
-	const authorIdValueList = [];
 	const dispatch = useDispatch();
+
+	const authorIdValueList = [];
+	const authorsList = useSelector(getAuthorsList);
 
 	const createAuthorIdValueList = () => {
 		authorsList.forEach(author => authorIdValueList[author.id] = author.name);

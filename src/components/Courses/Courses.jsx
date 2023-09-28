@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
-import { getCoursesList, getAuthorsList } from './../../store/selectors';
+import { getCoursesList } from './../../store/selectors';
 
 import { CourseCard } from './components/CourseCard/CourseCard';
 import { EmptyCourseListComponent } from './components/EmptyCourseListComponent/EmptyCourseListComponent';
@@ -18,7 +18,6 @@ export const Courses = ({handleShowCourse}) => {
 	// };
 
 	const coursesList = useSelector(getCoursesList);
-	const authorsList = useSelector(getAuthorsList);
 
 	const isCoursesListNotEmpty = coursesList.length > 0;
 
@@ -36,7 +35,6 @@ export const Courses = ({handleShowCourse}) => {
 						<CourseCard
 							key={courseItem.id}
 							course={courseItem}
-							authorsList={authorsList}
 							handleShowCourse={handleShowCourse}
 						/>
 					))}

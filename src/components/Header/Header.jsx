@@ -21,6 +21,7 @@ export const Header = ({isLoggedIn, setLoginToken}) => {
 	let showName = !isLoginOrRegistrationPage && currentUser.name;
 
 	const handleLogOut = () => {
+		localStorage.removeItem('token');
 		setLoginToken(null);
 		dispatch(removeUserData());
 	};

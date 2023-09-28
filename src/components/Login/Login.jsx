@@ -60,13 +60,15 @@ export const Login = ({setLoginToken}) => {
         }
 
         if (response.successful) {
-            dispatch(setUserData({
+            const userData = {
                 isAuth: true,
                 name: response.user.name,
                 email: response.user.email,
                 token: response.result,
-            }));
+            };
+            localStorage.setItem('token', response.result);
             setLoginToken(response.result);
+            dispatch(setUserData(userData));
             navigate("/");
         }
     };
