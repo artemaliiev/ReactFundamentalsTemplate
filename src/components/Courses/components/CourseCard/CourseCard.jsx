@@ -30,7 +30,7 @@ export const CourseCard = ({course, handleShowCourse, authorsList}) => {
 	};
 
 	const handleDeleteCourse = courseId => {
-		dispatch(deleteCourse({id: courseId}));
+		dispatch(deleteCourse(courseId));
 	}
 
 	const formattedDate = formatCreationDate(course.creationDate);

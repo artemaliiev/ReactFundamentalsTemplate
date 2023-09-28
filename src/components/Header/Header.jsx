@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
 import { getUser } from './../../store/selectors';
@@ -21,22 +21,22 @@ export const Header = ({isLoggedIn, setLoginToken}) => {
 	let showName = !isLoginOrRegistrationPage && currentUser.name;
 
 	const handleLogOut = () => {
-		dispatch(removeUserData());
 		setLoginToken(null);
+		dispatch(removeUserData());
 	};
 
 	const HeaderButton = () => {
 		if (!isLoginOrRegistrationPage && isLoggedIn) {
-			return <Button handleClick={handleLogOut} buttonText="Logout" />;
+			return <Button handleClick={handleLogOut} buttonText="Logout" data-testid="logout" />;
 		}
 	};
 
 	return (
 		<div className={styles.headerWrapper}>
 			<div className={styles.headerContainer}>
-				<Link to="/">
+				{/* <Link to="/"> */}
 					<Logo />
-				</Link>
+				{/* </Link> */}
 
 				<div className={styles.userContainer}>
 					{showName && <p className={styles.userName}>{currentUser.name}</p>}
