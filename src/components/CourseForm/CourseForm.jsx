@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { saveCourse } from '../../store/slices/coursesSlice';
@@ -7,19 +7,23 @@ import { saveCourse } from '../../store/slices/coursesSlice';
 import { CreateAuthor } from '../CourseForm/components/CreateAuthor/CreateAuhtor';
 import { Input } from '../../common/Input/Input';
 import { Button } from '../../common/Button/Button';
-import { AuthorItem } from '../CourseForm/components/AuthorItem/AuthorItem'
+import { AuthorItem } from '../CourseForm/components/AuthorItem/AuthorItem';
+
+import { getAuthorsList } from './../../store/selectors';
 
 import { getCourseDuration } from '../../helpers';
 
 import styles from './styles.module.css';
 
-export const CourseForm = ({authorsList, createCourse, createAuthor}) => {
+export const CourseForm = ({createCourse, createAuthor}) => {
     const TITLE_LABEL = 'Title';
     const DURATION_LABEL = 'Duration';
     const INPUT_PLACEHOLDER = 'Input text';
 	const dispatch = useDispatch();
 
     const navigate = useNavigate();
+
+    const authorsList = useSelector(getAuthorsList);
 
     const setCreationDate = () => {
         const rawDate = new Date().toJSON().slice(0, 10);

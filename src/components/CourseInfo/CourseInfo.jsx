@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link, useParams } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+import { getCoursesList, getAuthorsList } from '../../store/selectors';
+
 import styles from './styles.module.css';
 
 import { formatCreationDate, getCourseDuration } from '../../helpers';
@@ -8,8 +11,11 @@ import { Button } from '../../common/Button/Button';
 
 import { BUTTON_BACK_TEXT } from '../../constants';
 
-export const CourseInfo = ({coursesList, authorsList, onBack, showCourseId}) => {
+export const CourseInfo = ({onBack, showCourseId}) => {
 	const {courseId} = useParams();
+	const coursesList = useSelector(getCoursesList);
+	const authorsList = useSelector(getAuthorsList);
+
 	const showCourse = coursesList.find(course => course.id === courseId);
 	if (!showCourse) {
 		return '';

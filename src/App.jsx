@@ -12,11 +12,12 @@ import { CourseInfo } from './components/CourseInfo/CourseInfo';
 import { CourseForm } from './components/CourseForm/CourseForm'
 
 // import { getCourses } from './services';
-import { fetchCourses } from './store/slices/coursesSlice';
-import { fetchAuthors } from './store/slices/authorsSlice';
-import { getCourses, getAuthors } from './store/selectors';
+import { setCourses } from './store/slices/coursesSlice';
+import { setAuthors } from './store/slices/authorsSlice';
+import { getCourses, getAuthors } from './services';
+// import { getCoursesList, getAuthorsList } from './store/selectors';
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // use mocked data till API implementation
 // import { mockedAuthorsList, mockedCoursesList } from './constants';
@@ -24,19 +25,20 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from './App.module.css';
 
 function App() {
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(fetchCourses());
-	}, [dispatch]);
-
-	useEffect(() => {
-		dispatch(fetchAuthors());
-	}, [dispatch]);
-
-
 	const [loginToken, setLoginToken] = useLocalStorage("token", null);
-	const coursesList = useSelector(getCourses);
-	const authorsList = useSelector(getAuthors);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const courses = await getCourses();
+			const authors = await getAuthors();
+			dispatch(setCourses(courses.result));
+			dispatch(setAuthors(authors.result));
+		}
+		if (loginToken) {
+			fetchData();
+		}
+	}, [dispatch, loginToken]);
 
 	return (
 		<div className={styles.mainWrapper}>
@@ -50,8 +52,8 @@ function App() {
 						path="/courses"
 						element={
 							<Courses
-								coursesList={coursesList}
-								authorsList={authorsList}
+								// coursesList={coursesList}
+								// authorsList={authorsList}
 							/>
 						}
 					/>
@@ -59,8 +61,8 @@ function App() {
 						path="/courses/:courseId"
 						element={
 							<CourseInfo
-								coursesList={coursesList}
-								authorsList={authorsList}
+								// coursesList={coursesList}
+								// authorsList={authorsList}
 							/>
 						}
 					/>
@@ -68,7 +70,7 @@ function App() {
 						path="/courses/add"
 						element={
 							<CourseForm
-								authorsList={authorsList}
+								// authorsList={authorsList}
 							/>
 						}
 					/>

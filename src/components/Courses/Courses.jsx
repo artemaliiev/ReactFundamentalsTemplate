@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+import { getCoursesList, getAuthorsList } from './../../store/selectors';
+
 import { CourseCard } from './components/CourseCard/CourseCard';
 import { EmptyCourseListComponent } from './components/EmptyCourseListComponent/EmptyCourseListComponent';
 import { CourseSearch } from '../CourseSearch/CourseSearch';
@@ -8,11 +11,14 @@ import { Button } from '../../common';
 
 import styles from './styles.module.css';
 
-export const Courses = ({coursesList, authorsList, handleShowCourse}) => {
+export const Courses = ({handleShowCourse}) => {
 	// const [finalCoursesList, setFinalCoursesList] = useState(coursesList);
 	// const handleSearchResult = courseSearchResult => {
 	// 	setFinalCoursesList(courseSearchResult);
 	// };
+
+	const coursesList = useSelector(getCoursesList);
+	const authorsList = useSelector(getAuthorsList);
 
 	const isCoursesListNotEmpty = coursesList.length > 0;
 
