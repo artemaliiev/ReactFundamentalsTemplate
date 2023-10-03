@@ -11,8 +11,9 @@ export const authorsSlice = createSlice({
             return state = payload;
         },
 		saveAuthor: (state, {payload}) => {
-			const isAuthorExists = state.find(author => author.id === payload.id);
-            return isAuthorExists ? state : state.concat(payload);
+			// const isAuthorExists = state.find(author => author.id === payload.id);
+            // return isAuthorExists ? state : state.concat(payload);
+			return state.concat(payload);
         },
 	},
 });

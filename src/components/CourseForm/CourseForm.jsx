@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { getCoursesList, getAuthorsList } from './../../store/selectors';
 
-import { saveCourse } from '../../store/slices/coursesSlice';
+import { createCourseThunk, updateCourseThunk } from './../../store/thunks/coursesThunk';
 
 import { CreateAuthor } from '../CourseForm/components/CreateAuthor/CreateAuhtor';
 import { Input } from '../../common/Input/Input';
 import { Button } from '../../common/Button/Button';
 import { AuthorItem } from '../CourseForm/components/AuthorItem/AuthorItem';
 
-import { getAuthorsList } from './../../store/selectors';
-
 import { getCourseDuration } from '../../helpers';
+import { formatCreationDate }  from '../../helpers';
 
 import styles from './styles.module.css';
 
@@ -19,10 +19,10 @@ export const CourseForm = ({createCourse, createAuthor}) => {
     const TITLE_LABEL = 'Title';
     const DURATION_LABEL = 'Duration';
     const INPUT_PLACEHOLDER = 'Input text';
+
 	const dispatch = useDispatch();
-
     const navigate = useNavigate();
-
+    const coursesList = useSelector(getCoursesList);
     const authorsList = useSelector(getAuthorsList);
 
     const setCreationDate = () => {
@@ -31,16 +31,32 @@ export const CourseForm = ({createCourse, createAuthor}) => {
         return `${rawDate.slice(8, 10)}/${rawDate.slice(5, 7)}/${rawDate.slice(0, 4)}`;
     }
 
-    const [newCourse, setNewCourse] = useState({
-        id: (Math.random()*1000).toString(),
+    let defaultCourseData = {
         title: '',
         decription: '',
         duration: 0,
         creationDate: setCreationDate(),
         authors: []
-    });
+    };
+    let defaultAuthors = [];
+
+    const {courseId} = useParams();
+
+    if (courseId) {
+        const courseToEdit = coursesList.find(course => course.id === courseId);
+        defaultCourseData = {
+            title: courseToEdit.title,
+            decription: courseToEdit.description,
+            duration: courseToEdit.duration,
+            creationDate: formatCreationDate(courseToEdit.creationDate),
+            authors: courseToEdit.authors
+        };
+        defaultAuthors = authorsList.filter(author => courseToEdit.authors.includes(author.id));
+    }
+
+    const [newCourse, setNewCourse] = useState(defaultCourseData);
     const [submitted, setSubmitted] = useState(false);
-    const [selectedAuthors, setSelectedAuthors] = useState([]);
+    const [selectedAuthors, setSelectedAuthors] = useState(defaultAuthors);
 
     const handleInputChange = e => {
         const nextFormState = {
@@ -56,14 +72,13 @@ export const CourseForm = ({createCourse, createAuthor}) => {
         setSubmitted(true);
 
         if (newCourse.title && newCourse.decription && newCourse.duration > 0 && newCourse.authors.length > 0) {
-            // const nextCourseState = {
-            //     ...newCourse,
-            //     creationDate: creationDate
-            // }
             setNewCourse(newCourse);
 
-            // createCourse(newCourse);
-            dispatch(saveCourse(newCourse));
+            if (courseId) {
+                dispatch(updateCourseThunk(courseId, newCourse));
+            } else {
+                dispatch(createCourseThunk(newCourse));
+            }
 
             navigate("/courses");
         }
@@ -86,7 +101,6 @@ export const CourseForm = ({createCourse, createAuthor}) => {
 
         const isAuthorPresent = newCourse.authors.includes(author.id);
         if (!isAuthorPresent) {
-            // const newCourseAuthors = newCourse.authors;
             setNewCourse({
                 ...newCourse,
                 authors: [

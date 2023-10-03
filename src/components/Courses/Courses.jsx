@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { getCoursesList } from './../../store/selectors';
-
-import { getCoursesThunk } from './../../store/thunks/coursesThunk';
 
 import { CourseCard } from './components/CourseCard/CourseCard';
 import { EmptyCourseListComponent } from './components/EmptyCourseListComponent/EmptyCourseListComponent';
@@ -18,12 +16,8 @@ export const Courses = ({handleShowCourse}) => {
 	// const handleSearchResult = courseSearchResult => {
 	// 	setFinalCoursesList(courseSearchResult);
 	// };
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 	const coursesList = useSelector(getCoursesList);
-
-	useEffect(() => {
-		dispatch(getCoursesThunk());
-	}, [dispatch]);
 
 	const isCoursesListNotEmpty = coursesList.length > 0;
 

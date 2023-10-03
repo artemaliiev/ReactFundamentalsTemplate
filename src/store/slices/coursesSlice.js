@@ -10,21 +10,15 @@ export const coursesSlice = createSlice({
             return state = payload;
         },
 		saveCourse: (state, {payload}) => {
-			const isCourseExists = state.find(course => course.id === payload.id);
-            return isCourseExists ? state : state.concat(payload);
+            return state.concat(payload);
         },
 		deleteCourse: (state, {payload}) => {
 			const newState = state.filter(course => course.id !== payload);
             return newState;
         },
 		updateCourse: (state, {payload}) => {
-			const oldCourse = state.filter(course => course.id === payload.id);
-			const newState = {
-				...oldCourse,
-				...payload
-			};
-
-            return newState;
+			const newState = state.filter(course => course.id !== payload.id);
+            return newState.concat(payload);
         }
 	},
 });

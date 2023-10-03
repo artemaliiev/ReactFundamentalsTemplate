@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLocation } from "react-router-dom";
 import { useSelector } from 'react-redux';
+import { logoutThunk } from './../../store/thunks/userThunk';
 
 import { getUser } from './../../store/selectors';
 import { useDispatch } from "react-redux";
-import { removeUserData } from '../../store/slices/userSlice';
 
 import { Logo } from './components/Logo/Logo'
 import { Button } from '../../common/Button/Button'
@@ -22,8 +22,8 @@ export const Header = ({isLoggedIn, setLoginToken}) => {
 
 	const handleLogOut = () => {
 		localStorage.removeItem('token');
+		dispatch(logoutThunk());
 		setLoginToken(null);
-		dispatch(removeUserData());
 	};
 
 	const HeaderButton = () => {

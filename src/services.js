@@ -28,8 +28,9 @@ export const login = async (data) => {
 
 export const getCourses = () => {
   return fetch('http://localhost:4000/courses/all', {
-    "headers": {"Content-Type": "application/json"}, "method": "GET"}
-    ).then(resoponse => resoponse.json());
+    "headers": {"Content-Type": "application/json"},
+    "method": "GET"
+  }).then(resoponse => resoponse.json());
 };
 
 export const getAuthors = async () => {
@@ -39,26 +40,60 @@ export const getAuthors = async () => {
   }).then(resoponse => resoponse.json());
 };
 
-export const getCurrentUser = async () => {
-  // write your code here
+export const getCurrentUser = async (loginToken) => {
+  return fetch('http://localhost:4000/users/me', {
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": loginToken
+    },
+    "method": "GET"
+  }).then(resoponse => resoponse.json());
 };
 
-export const updateCourse = async () => {
-  // write your code here
+export const updateCourse = async (courseId, data) => {
+  return fetch(`http://localhost:4000/courses/${courseId}`, {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "method": "PUT",
+    "body": JSON.stringify(data),
+  }).then(resoponse => resoponse.json());
 };
 
 export const logout = async () => {
-  // write your code here
+  return fetch('http://localhost:4000/logout', {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "method": "DELETE"
+  }).then(resoponse => resoponse.json());
 };
 
-export const deleteCourse = async () => {
-  // write your code here
+export const deleteCourse = async (courseId) => {
+  return fetch(`http://localhost:4000/courses/${courseId}`, {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "method": "DELETE"
+  }).then(resoponse => resoponse.json());
 };
 
-export const createCourse = async () => {
-  // write your code here
+export const createCourse = async (data) => {
+  return fetch('http://localhost:4000/courses/add', {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "method": "POST",
+    "body": JSON.stringify(data),
+  }).then(resoponse => resoponse.json());
 };
 
-export const createAuthor = async () => {
-  // write your code here
+export const createAuthor = async (data) => {
+  return fetch('http://localhost:4000/authors/add', {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "method": "POST",
+    "body": JSON.stringify(data),
+  }).then(resoponse => resoponse.json());
 };

@@ -7,9 +7,10 @@ import { getCourseDuration, formatCreationDate } from '../../../../helpers';
 import { Button } from './../../../../common/Button/Button'
 
 import { useDispatch } from "react-redux";
-import { deleteCourse } from '../../../../store/slices/coursesSlice';
+import { deleteCourseThunk } from '../../../../store/thunks/coursesThunk';
 
 import { getAuthorsList } from '../../../../store/selectors';
+import { getUserRole } from '../../../../store/selectors';
 
 import { BUTTON_SHOW_COURSE_TEXT } from '../../../../constants'
 
@@ -18,6 +19,8 @@ import styles from './styles.module.css';
 export const CourseCard = ({course, handleShowCourse}) => {
 	const { pathname } = useLocation();
 	const dispatch = useDispatch();
+
+	const isAdmin = useSelector(getUserRole) === 'admin';
 
 	const authorIdValueList = [];
 	const authorsList = useSelector(getAuthorsList);
@@ -35,7 +38,7 @@ export const CourseCard = ({course, handleShowCourse}) => {
 	};
 
 	const handleDeleteCourse = courseId => {
-		dispatch(deleteCourse(courseId));
+		dispatch(deleteCourseThunk(courseId));
 	}
 
 	const formattedDate = formatCreationDate(course.creationDate);
@@ -61,9 +64,12 @@ export const CourseCard = ({course, handleShowCourse}) => {
 				</p>
 				<div>
 					<Link to={`${pathname}/${course.id}`}><Button buttonText={BUTTON_SHOW_COURSE_TEXT} /></Link>
-					<Button handleClick={()=>handleDeleteCourse(course.id)} buttonText="Delete" data-testid="deleteCourse"/>
-					<Button buttonText="Update" data-testid="updateCourse"/>
-					{/* <Button handleClick={()=>handleShowCourse(course.id)} buttonText={BUTTON_SHOW_COURSE_TEXT} /> */}
+					{isAdmin &&
+						<>
+							<Button handleClick={() => handleDeleteCourse(course.id)} buttonText="Delete" data-testid="deleteCourse" />
+							<Link to={`${pathname}/update/${course.id}`}><Button buttonText="Update" data-testid="updateCourse" /></Link>
+						</>
+					}
 				</div>
 			</div>
 		</div>

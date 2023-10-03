@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { saveAuthor } from '../../../../store/slices/authorsSlice';
+import { createAuthorThunk } from './../../../../store/thunks/authorsThunk';
 
 import { Input } from '../../../../common/Input/Input';
 import { Button } from '../../../../common/Button/Button';
@@ -17,13 +17,9 @@ export const CreateAuthor = ({onCreateAuthor}) => {
 
     const handleCreate = e => {
         e.preventDefault();
-        // onCreateAuthor(authorName);
-        dispatch(
-            saveAuthor({
-                name: authorName,
-                id: (Math.random()*1000).toString()
-            })
-        );
+        dispatch(createAuthorThunk({
+            name: authorName,
+        }));
     };
 
     return (
