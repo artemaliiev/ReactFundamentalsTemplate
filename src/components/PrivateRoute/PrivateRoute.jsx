@@ -1,10 +1,11 @@
-// import React from 'react';
+import React from 'react';
 
-// export const PrivateRoute = () => {
+export const PrivateRoute = ({ children }) => {
 
-// 	//wriet your code here
-
-// 	return (
-// 			<p>PrivateRoute</p>//wriet your code here instead of this 'p' tag
-// 	);
-// };
+	return (
+		// auth ? children : <Navigate to="/login" />;
+        <>
+            {children}
+        </>
+	);
+};

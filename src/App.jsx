@@ -12,9 +12,9 @@ import { CourseInfo } from './components/CourseInfo/CourseInfo';
 import { CourseForm } from './components/CourseForm/CourseForm'
 
 // import { getCourses } from './services';
-import { setCourses } from './store/slices/coursesSlice';
+// import { setCourses } from './store/slices/coursesSlice';
 import { setAuthors } from './store/slices/authorsSlice';
-import { getCourses, getAuthors } from './services';
+import { getAuthors } from './services';
 // import { getCoursesList, getAuthorsList } from './store/selectors';
 
 import { useDispatch } from "react-redux";
@@ -27,18 +27,25 @@ import styles from './App.module.css';
 function App() {
 	const [loginToken, setLoginToken] = useLocalStorage("token", null);
 	const dispatch = useDispatch();
-
 	useEffect(() => {
 		const fetchData = async () => {
-			const courses = await getCourses();
+			// const courses = await getCourses();
 			const authors = await getAuthors();
-			dispatch(setCourses(courses.result));
+			// dispatch(setCourses(courses.result));
 			dispatch(setAuthors(authors.result));
 		}
 		if (loginToken) {
 			fetchData();
 		}
 	}, [dispatch, loginToken]);
+
+	// useEffect(() => {
+	// 	dispatch(fetchAuthors());
+	// }, [dispatch]);
+
+
+	// const coursesList = useSelector(getCourses);
+	// const authorsList = useSelector(getAuthors);
 
 	return (
 		<div className={styles.mainWrapper}>

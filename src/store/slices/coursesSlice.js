@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getCourses } from './../../services';
 
 const initialState = [];
 
@@ -18,7 +17,15 @@ export const coursesSlice = createSlice({
 			const newState = state.filter(course => course.id !== payload);
             return newState;
         },
-		// updateCourse: 
+		updateCourse: (state, {payload}) => {
+			const oldCourse = state.filter(course => course.id === payload.id);
+			const newState = {
+				...oldCourse,
+				...payload
+			};
+
+            return newState;
+        }
 	},
 });
 
@@ -26,13 +33,13 @@ export const coursesSlice = createSlice({
 export const { setCourses, saveCourse, deleteCourse, updateCourse } =
 	coursesSlice.actions;
 
-export const fetchCourses = () => async dispatch => {
-	try {
-		await getCourses()
-			.then(response => dispatch(setCourses(response.result)));
-	} catch(error) {
-		console.log('Default error');
-	}
-};
+// export const fetchCourses = () => async dispatch => {
+// 	try {
+// 		await getCourses()
+// 			.then(response => dispatch(setCourses(response.result)));
+// 	} catch(error) {
+// 		console.log('Default error');
+// 	}
+// };
 
 export default coursesSlice.reducer;
