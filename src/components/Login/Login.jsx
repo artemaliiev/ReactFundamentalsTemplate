@@ -67,7 +67,7 @@ export const Login = ({setLoginToken}) => {
                 token: response.result,
             };
             localStorage.setItem('token', response.result);
-            setLoginToken(response.result);
+            // setLoginToken(response.result);
             dispatch(setUserData(userData));
             navigate("/");
         }

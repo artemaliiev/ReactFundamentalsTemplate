@@ -4,7 +4,7 @@ const initialState = {
 	isAuth: false,
 	name: '',
 	email: '',
-	token: localStorage.getItem('token'),
+	token: '',
 	role: ''
 };
 

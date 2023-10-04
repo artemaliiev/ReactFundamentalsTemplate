@@ -24,7 +24,7 @@ export const Header = ({setLoginToken}) => {
 	const handleLogOut = () => {
 		localStorage.removeItem('token');
 		dispatch(logoutThunk());
-		setLoginToken(null);
+		// setLoginToken(null);
 	};
 
 	// const HeaderButton = () => {
