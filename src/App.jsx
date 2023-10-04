@@ -54,7 +54,6 @@ function App() {
 	return (
 		<div className={styles.mainWrapper}>
 			<Header
-				isLoggedIn={loginToken}
 				setLoginToken={setLoginToken}
 			/>
 			{loginToken ?
