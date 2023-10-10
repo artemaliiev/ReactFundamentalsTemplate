@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { getCoursesList } from './../../store/selectors';
@@ -12,21 +12,17 @@ import styles from './styles.module.css';
 
 export const Courses = ({handleShowCourse}) => {
 	// const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const coursesList = useSelector(getCoursesList);
 
 	const isCoursesListNotEmpty = coursesList.length > 0;
-
-	const handleClick = () => {
-		navigate("/courses/add");
-	}
 
 	if (isCoursesListNotEmpty) {
 		return (
 			<>
 				<div className={styles.addNewCourseWrapper}>
 					<div className={styles.addNewCourseBtnContainer}>
-						<Link to="/courses/add"><Button buttonText='Add new' data-testid="addCourse" handleClick={handleClick}/></Link>
+						<Link to="/courses/add"><Button buttonText='Add new' data-testid="addCourse"/></Link>
+						{/* <Link to="/courses/add" data-testid="addCourse">Add new</Link> */}
 					</div>
 				</div>
 				<div className={styles.panel}>

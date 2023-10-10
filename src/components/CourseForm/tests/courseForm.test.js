@@ -1,5 +1,5 @@
 import React from "react";
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { screen, fireEvent } from "@testing-library/react";
 import { renderWithState } from '../../../test/renderWithState';
 import { mockedCoursesList, mockedAuthorsList } from '../../../constants';
@@ -73,5 +73,37 @@ describe('CourseForm', () => {
         fireEvent.click(deleteCourseAuthor[0]);
 
         expect(screen.queryByTestId('selectedAuthor')).not.toBeInTheDocument();
+    });
+
+    it('Adding course with error', () => {
+        renderWithState(
+            <MemoryRouter>
+                <CourseForm createAuthor={mockedCreateAuthor}/>
+            </MemoryRouter>,
+            { preloadedState }
+        );
+
+        const createCourseButton = screen.getByTestId('createCourseButton');
+        fireEvent.click(createCourseButton);
+
+        expect(screen.getByText(/Duration is required/i)).toBeInTheDocument();
+    });
+
+    it('should display course edit form', () => {
+        renderWithState(
+            <MemoryRouter initialEntries={["/courses/update/de5aaa59-90f5-4dbc-b8a9-aaf205c551ba"]}>
+                <Routes>
+                    <Route
+						path="/courses/update/:courseId"
+						element={
+							<CourseForm/>
+						}
+					/>
+                </Routes>
+            </MemoryRouter>,
+            { preloadedState }
+        );
+
+        expect(screen.getByText(/02:40 hours/i)).toBeInTheDocument();
     });
 });

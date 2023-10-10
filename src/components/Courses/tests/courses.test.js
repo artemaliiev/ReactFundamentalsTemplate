@@ -1,6 +1,7 @@
 import React from "react";
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, BrowserRouter } from 'react-router-dom';
 import { screen, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { renderWithState } from '../../../test/renderWithState';
 import { mockedCoursesList } from '../../../constants';
 
@@ -11,7 +12,6 @@ const preloadedState = {
         role: 'admin'
     },
     courses: mockedCoursesList,
-    // authors: mockedAuthorsList
 };
 
 describe('Cousrses', () => {
@@ -43,14 +43,18 @@ describe('Cousrses', () => {
 
     // it('CourseForm should be shown after a click on the "Add new course" button', () => {
     //     renderWithState(
-    //         <MemoryRouter>
+    //         <BrowserRouter>
     //             <Courses />
-    //         </MemoryRouter>,
+    //         </BrowserRouter>,
     //         { preloadedState }
     //     );
 
     //     const addCourseButton = screen.getByTestId('addCourse');
-    //     fireEvent.click(addCourseButton);
+    //     // const addCourseButton = screen.getByText('Add new');
+    //     userEvent.click(addCourseButton);
+
+    //     // expect(navigate).toHaveBeenCalledTimes(1)
+    //     // expect(navigate).toHaveBeenCalledWith('/courses/add')
 
     //     expect(screen.getByText('Course edit/create page')).toBeInTheDocument();
     // });
