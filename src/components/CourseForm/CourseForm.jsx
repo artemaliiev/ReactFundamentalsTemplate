@@ -119,8 +119,17 @@ export const CourseForm = ({createCourse, createAuthor}) => {
         }
     }
 
+    const handleDeleteCourseAuthor = (e, name) => {
+        setSelectedAuthors(selectedAuthors.filter(item => item.name !== name));
+    }
+
     const SelectedAuthor = ({author}) => {
-        return <p data-testid="selectedAuthor">{author.name}</p>;
+        return (
+            <p data-testid="selectedAuthor">
+                {author.name}
+                <Button handleClick={(e)=>handleDeleteCourseAuthor(e, author.name)} buttonText='Delete author' data-testid="deleteCourseAuthor"/>
+            </p>
+        )
     };
 
 	return (

@@ -23,17 +23,6 @@ import styles from './App.module.css';
 function App() {
 	const [loginToken, setLoginToken] = useLocalStorage("token", null);
 	const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		// const courses = await getCourses();
-	// 		const authors = await getAuthors();
-	// 		// dispatch(setCourses(courses.result));
-	// 		dispatch(setAuthors(authors.result));
-	// 	}
-	// 	if (loginToken) {
-	// 		fetchData();
-	// 	}
-	// }, [dispatch, loginToken]);
 
 	useEffect(() => {
 		if (loginToken) {
@@ -42,14 +31,6 @@ function App() {
 			dispatch(getUserThunk(loginToken));
 		}
 	}, [dispatch, loginToken]);
-
-	// useEffect(() => {
-	// 	dispatch(fetchAuthors());
-	// }, [dispatch]);
-
-
-	// const coursesList = useSelector(getCourses);
-	// const authorsList = useSelector(getAuthors);
 
 	return (
 		<div className={styles.mainWrapper}>

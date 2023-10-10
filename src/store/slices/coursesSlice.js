@@ -23,17 +23,7 @@ export const coursesSlice = createSlice({
 	},
 });
 
-// use these actions in your components / thunks
 export const { setCourses, saveCourse, deleteCourse, updateCourse } =
 	coursesSlice.actions;
-
-// export const fetchCourses = () => async dispatch => {
-// 	try {
-// 		await getCourses()
-// 			.then(response => dispatch(setCourses(response.result)));
-// 	} catch(error) {
-// 		console.log('Default error');
-// 	}
-// };
 
 export default coursesSlice.reducer;

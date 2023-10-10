@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { getCoursesList } from './../../store/selectors';
@@ -17,9 +17,14 @@ export const Courses = ({handleShowCourse}) => {
 	// 	setFinalCoursesList(courseSearchResult);
 	// };
 	// const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const coursesList = useSelector(getCoursesList);
 
 	const isCoursesListNotEmpty = coursesList.length > 0;
+
+	const handleClick = () => {
+		navigate("/courses/add");
+	}
 
 	if (isCoursesListNotEmpty) {
 		return (
@@ -27,7 +32,7 @@ export const Courses = ({handleShowCourse}) => {
 				<div className={styles.addNewCourseWrapper}>
 					<CourseSearch coursesList={coursesList}  />
 					<div className={styles.addNewCourseBtnContainer}>
-						<Link to="/courses/add"><Button buttonText='Add new' data-testid="addCourse" /></Link>
+						<Link to="/courses/add"><Button buttonText='Add new' data-testid="addCourse" handleClick={handleClick}/></Link>
 					</div>
 				</div>
 				<div className={styles.panel}>
