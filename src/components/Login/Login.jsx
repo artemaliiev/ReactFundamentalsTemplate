@@ -13,7 +13,7 @@ import { EMAIL_LABEL, PASSWORD_LABEL, DEFAULT_PLACEHOLDER_TEXT, BUTTON_LOGIN_TEX
 
 import styles from './styles.module.css';
 
-export const Login = ({setLoginToken}) => {
+export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [submitted, setSubmitted] = useState(false);
@@ -67,7 +67,6 @@ export const Login = ({setLoginToken}) => {
                 token: response.result,
             };
             localStorage.setItem('token', response.result);
-            // setLoginToken(response.result);
             dispatch(setUserData(userData));
             navigate("/");
         }

@@ -18,7 +18,7 @@ export const CourseInfo = ({onBack, showCourseId}) => {
 
 	const showCourse = coursesList.find(course => course.id === courseId);
 	if (!showCourse) {
-		return '';
+		return <div className={styles.courseContainer} data-testid='emptyCourseInfo'></div>;
 	}
 
 	const duration = getCourseDuration(showCourse.duration);
@@ -33,7 +33,7 @@ export const CourseInfo = ({onBack, showCourseId}) => {
 					<div>
 						<p>
 							<b>ID: </b>
-							{showCourseId}
+							{courseId}
 						</p>
 						<p>
 							<b>Duration: </b>
@@ -47,7 +47,7 @@ export const CourseInfo = ({onBack, showCourseId}) => {
 							<b>Authors</b>
 							<ul className={styles.authorsList}>
 								{ showedAuthorsList.map(author=>(
-									<li key={author.id}>{author.name}</li>
+									<li key={author.id} data-testid="courseAuthors">{author.name}</li>
 								)) }
 							</ul>
 						</div>

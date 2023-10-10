@@ -12,7 +12,7 @@ import { Button } from '../../common/Button/Button'
 
 import styles from './styles.module.css';
 
-export const Header = ({setLoginToken}) => {
+export const Header = () => {
 	const currentUser = useSelector(getUser);
 
     const dispatch = useDispatch();
@@ -24,7 +24,6 @@ export const Header = ({setLoginToken}) => {
 	const handleLogOut = () => {
 		localStorage.removeItem('token');
 		dispatch(logoutThunk());
-		// setLoginToken(null);
 	};
 
 	// const HeaderButton = () => {

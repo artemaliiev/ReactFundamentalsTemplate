@@ -6,9 +6,6 @@ import { getCoursesThunk } from './store/thunks/coursesThunk';
 import { getAuthorsThunk } from './store/thunks/authorsThunk';
 import { getUserThunk } from './store/thunks/userThunk';
 
-import { useLocalStorage } from './helpers/useLocalStorage';
-
-
 import { Header } from './components/Header/Header';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 import { Login } from './components/Login/Login';
@@ -21,7 +18,7 @@ import { CourseForm } from './components/CourseForm/CourseForm';
 import styles from './App.module.css';
 
 function App() {
-	const [loginToken, setLoginToken] = useLocalStorage("token", null);
+	const loginToken = localStorage.getItem('token');
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -34,9 +31,7 @@ function App() {
 
 	return (
 		<div className={styles.mainWrapper}>
-			<Header
-				setLoginToken={setLoginToken}
-			/>
+			<Header />
 			{loginToken ?
 				<Routes>
 					<Route
@@ -77,9 +72,7 @@ function App() {
 					<Route
 						path="/login"
 						element={
-							<Login
-								setLoginToken={setLoginToken}
-							/>
+							<Login />
 						}
 					/>
 					<Route
