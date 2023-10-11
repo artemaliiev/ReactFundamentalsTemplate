@@ -101,7 +101,7 @@ export const Login = () => {
 
                 {formErrors}
 
-				<Button buttonText={BUTTON_LOGIN_TEXT} />
+				<Button buttonText={BUTTON_LOGIN_TEXT} data-testid="loginBtn" />
 			</form>
 			<p>
                 If you don't have an account you can &nbsp;

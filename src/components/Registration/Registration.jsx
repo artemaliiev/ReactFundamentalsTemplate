@@ -102,7 +102,7 @@ export const Registration = () => {
 
                 {formErrors}
 
-				<Button buttonText={BUTTON_REGISTER_TEXT} />
+				<Button buttonText={BUTTON_REGISTER_TEXT} data-testid="registerBtn" />
 			</form>
 			<p>
 				If you have an account you can&nbsp;
