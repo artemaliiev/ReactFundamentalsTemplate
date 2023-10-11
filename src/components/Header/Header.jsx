@@ -16,21 +16,11 @@ export const Header = () => {
 	const currentUser = useSelector(getUser);
 
     const dispatch = useDispatch();
-	// const { pathname } = useLocation();
-	// const isLoginOrRegistrationPage = pathname === '/login' || pathname === '/registration';
-
-	// let showName = !isLoginOrRegistrationPage && currentUser.name;
 
 	const handleLogOut = () => {
 		localStorage.removeItem('token');
 		dispatch(logoutThunk());
 	};
-
-	// const HeaderButton = () => {
-	// 	if (!isLoginOrRegistrationPage && isLoggedIn) {
-	// 		return <Button handleClick={handleLogOut} buttonText="Logout" data-testid="logout" />;
-	// 	}
-	// };
 
 	return (
 		<div className={styles.headerWrapper}>

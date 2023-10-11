@@ -6,7 +6,7 @@ import { createAuthorThunk } from './../../../../store/thunks/authorsThunk';
 import { Input } from '../../../../common/Input/Input';
 import { Button } from '../../../../common/Button/Button';
 
-export const CreateAuthor = ({onCreateAuthor}) => {
+export const CreateAuthor = () => {
 	const dispatch = useDispatch();
 
     const [authorName, setAuthorName] = useState('');
