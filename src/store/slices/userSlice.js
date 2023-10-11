@@ -16,7 +16,6 @@ export const userSlice = createSlice({
             return state = payload;
         },
 		removeUserData: (state, {payload}) => {
-			console.log('u2');
             return state = initialState;
         },
 	},

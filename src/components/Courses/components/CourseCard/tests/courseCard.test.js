@@ -1,6 +1,6 @@
 import React from "react";
 import { MemoryRouter } from 'react-router-dom';
-import { screen } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import { renderWithState } from '../../../../../test/renderWithState';
 import { mockedAuthorsList } from '../../../../../constants';
 import { getCourseDuration } from '../../../../../helpers/getCourseDuration';
@@ -72,6 +72,23 @@ describe('Cousrse Card', () => {
             </MemoryRouter>,
             { preloadedState }
         );
+
+        expect(screen.getByText('08.03.2021')).toBeInTheDocument();
+    });
+
+    it('should delete course', () => {
+        preloadedState.user = {
+            role: 'admin'
+        };
+        renderWithState(
+            <MemoryRouter>
+                <CourseCard course={course} />
+            </MemoryRouter>,
+            { preloadedState }
+        );
+
+        const deleteCourse = screen.getByTestId('deleteCourse');
+        fireEvent.click(deleteCourse);
 
         expect(screen.getByText('08.03.2021')).toBeInTheDocument();
     });

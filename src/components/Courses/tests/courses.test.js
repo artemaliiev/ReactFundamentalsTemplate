@@ -1,5 +1,5 @@
 import React from "react";
-import { MemoryRouter, BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { screen, fireEvent } from "@testing-library/react";
 // import userEvent from "@testing-library/user-event";
 import { renderWithState } from '../../../test/renderWithState';
