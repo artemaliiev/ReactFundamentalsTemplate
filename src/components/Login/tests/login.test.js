@@ -19,6 +19,15 @@ jest.mock('../../../services', () => ({
     }),
 }));
 
+jest.mock('../../../services', () => {
+    const mockedService = {
+        login: jest.fn()
+    };
+    return {
+        login: jest.fn(() => mockedService)
+    };
+});
+
 describe('Login', () => {
     it('should change input name value', () => {
         renderWithState(
