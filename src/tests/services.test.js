@@ -2,6 +2,7 @@ import {
     getCourses,
     createUser,
     login,
+    logout,
     getAuthors,
     createCourse,
     createAuthor,
@@ -32,14 +33,32 @@ describe('services', () => {
 
     it('should login User', async () => {
         const userData = {
-            name: 'bob',
-            email: 'bob@bob.com',
-            password: 'bob@bob.com'
+            name: 'bobb',
+            email: 'bobb@bob.com',
+            password: 'bobb@bob.com'
         }
 
-        const user = await login(userData);
+        await createUser(userData);
 
-        expect(user.successful === true).toBeTruthy();
+        const result = await login(userData);
+
+        expect(result.successful === true).toBeTruthy();
+    });
+
+    it('should logout User', async () => {
+        const userData = {
+            name: 'bobbb',
+            email: 'bobbb@bob.com',
+            password: 'bobbb@bob.com'
+        }
+
+        await createUser(userData);
+
+        await login(userData);
+
+        const result = await logout();
+
+        expect(result.successful === true).toBeTruthy();
     });
 
     it('should get list of authors', async () => {
